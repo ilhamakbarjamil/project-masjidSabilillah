@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masjid Sabilillah - Website Resmi</title>
+    <link href="./output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body class="font-sans antialiased bg-white text-slate-800 overflow-x-hidden">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="bg-blue-900 text-white p-4 shadow-lg fixed w-full z-50 transition-all duration-300 ease-in-out border-b border-blue-400/30">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="flex items-center space-x-3">
+                <div class="bg-white w-12 h-12 rounded-full flex items-center justify-center">
+                    <i class="fas fa-mosque text-blue-900 text-2xl"></i>
+                </div>
+                <span class="text-2xl font-bold font-heading text-white">Masjid Sabilillah</span>
+            </a>
+
+            <ul class="hidden md:flex space-x-8 text-lg font-medium">
+                <li><a href="#beranda" class="hover:text-blue-200 transition duration-300 relative group py-2">Beranda<span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-300 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span></a></li>
+                <li><a href="#tentang" class="hover:text-blue-200 transition duration-300 relative group py-2">Tentang<span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-300 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span></a></li>
+                <li><a href="#jadwal-sholat" class="hover:text-blue-200 transition duration-300 relative group py-2">Jadwal<span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-300 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span></a></li>
+                <li><a href="#kegiatan" class="hover:text-blue-200 transition duration-300 relative group py-2">Kegiatan<span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-300 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span></a></li>
+                <li><a href="#kontak" class="hover:text-blue-200 transition duration-300 relative group py-2">Kontak<span class="absolute bottom-0 left-0 w-full h-0.5 bg-blue-300 scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></span></a></li>
+            </ul>
+
+            <a href="#donasi" class="hidden md:block bg-blue-800 hover:bg-blue-900 text-white px-6 py-3 rounded-full font-semibold transition duration-300 shadow-lg hover:shadow-xl">Donasi Sekarang</a>
+
+            <button class="md:hidden text-white focus:outline-none z-50" id="mobile-menu-button">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <div class="md:hidden mt-4 hidden" id="mobile-menu">
+            <ul class="flex flex-col space-y-3 text-lg font-medium bg-blue-900 p-4 rounded-lg">
+                <li><a href="#beranda" class="block py-3 px-4 hover:bg-blue-800 rounded transition duration-300">Beranda</a></li>
+                <li><a href="#tentang" class="block py-3 px-4 hover:bg-blue-800 rounded transition duration-300">Tentang</a></li>
+                <li><a href="#jadwal-sholat" class="block py-3 px-4 hover:bg-blue-800 rounded transition duration-300">Jadwal Sholat</a></li>
+                <li><a href="#kegiatan" class="block py-3 px-4 hover:bg-blue-800 rounded transition duration-300">Kegiatan</a></li>
+                <li><a href="#kontak" class="block py-3 px-4 hover:bg-blue-800 rounded transition duration-300">Kontak</a></li>
+                <li class="px-4 py-3 mt-2">
+                    <a href="#donasi" class="bg-blue-800 hover:bg-blue-900 text-white w-full block text-center px-6 py-3 rounded-full font-semibold transition duration-300">Donasi</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="relative bg-blue-900 h-screen flex items-center justify-center pt-16 overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1549425951-2a3c7e186b4c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80')] bg-cover bg-center opacity-20"></div>
+        <div class="absolute inset-0 bg-gradient-to-br from-blue-900/95 to-blue-800/90"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_10%_20%,rgba(59,130,246,0.1)_0%,transparent_25%),radial-gradient(circle_at_90%_80%,rgba(37,99,235,0.15)_0%,transparent_25%)]"></div>
+
+        <div class="container mx-auto text-center relative z-10 px-4">
+            <div class="max-w-4xl mx-auto mb-10">
+                <h1 class="text-5xl md:text-7xl font-extrabold font-heading text-white leading-tight mb-6 opacity-0 animate-fade-in-up">
+                    <span class="block">Masjid Sabilillah</span>
+                    <span class="text-3xl md:text-4xl mt-2 block font-light text-blue-200">Rumah Spiritual untuk Umat</span>
+                </h1>
+                <p class="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto mb-10 opacity-0 animate-fade-in-up delay-200">
+                    Tempat ibadah, pembelajaran, dan pengabdian yang mengedepankan kemuliaan akhlak dan kebersamaan
+                </p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-6 justify-center opacity-0 animate-fade-in-up delay-400">
+                <a href="#jadwal-sholat" class="bg-blue-800 hover:bg-blue-900 text-white px-8 py-4 rounded-full text-lg font-semibold transition duration-300 shadow-lg hover:shadow-xl inline-flex items-center justify-center">
+                    <i class="fas fa-clock mr-2"></i>Jadwal Sholat Hari Ini
+                </a>
+                <a href="#donasi" class="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-blue-800/30 transition duration-300 inline-flex items-center justify-center">
+                    <i class="fas fa-heart mr-2"></i>Donasi untuk Kemajuan Masjid
+                </a>
+            </div>
+        </div>
+        
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#tentang" class="text-white text-3xl">
+                <i class="fas fa-chevron-down"></i>
+            </a>
+        </div>
+    </section>
+
+    <!-- Tentang Kami Section -->
+    <section id="tentang" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold font-heading text-blue-900 mb-4 inline-block relative">
+                    Tentang Kami
+                    <span class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-blue-500 rounded"></span>
+                </h2>
+                <p class="text-slate-600 text-lg mt-8">
+                    Masjid Sabilillah berdiri sejak 1995 sebagai pusat ibadah, pembelajaran, dan pengabdian untuk komunitas Muslim di Malang. Kami berkomitmen menciptakan lingkungan spiritual yang mengedepankan keilmuan, kebersamaan, dan pelayanan terbaik.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+                <div class="bg-white border border-blue-100 p-8 rounded-2xl shadow-md hover:shadow-xl hover:translate-y-[-5px] transition-all duration-300 overflow-hidden relative group">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center text-2xl mb-6 mx-auto">
+                        <i class="fas fa-bullseye"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-blue-900 mb-4">Visi Kami</h3>
+                    <p class="text-slate-700 leading-relaxed">
+                        Menjadi masjid percontohan yang mengintegrasikan ibadah, pendidikan, dan pengabdian sosial dalam menjaga kemuliaan akhlak umat.
+                    </p>
+                    <div class="mt-6 pt-6 border-t border-blue-100">
+                        <a href="#" class="text-blue-700 hover:text-blue-900 transition flex items-center justify-center mx-auto w-fit font-medium">
+                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-blue-100 p-8 rounded-2xl shadow-md hover:shadow-xl hover:translate-y-[-5px] transition-all duration-300 overflow-hidden relative group">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center text-2xl mb-6 mx-auto">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-blue-900 mb-4">Misi Kami</h3>
+                    <p class="text-slate-700 leading-relaxed">
+                        Menyelenggarakan ibadah berkualitas, mengembangkan pendidikan Islam modern, dan menjalankan program sosial untuk kesejahteraan umat.
+                    </p>
+                    <div class="mt-6 pt-6 border-t border-blue-100">
+                        <a href="#" class="text-blue-700 hover:text-blue-900 transition flex items-center justify-center mx-auto w-fit font-medium">
+                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="bg-white border border-blue-100 p-8 rounded-2xl shadow-md hover:shadow-xl hover:translate-y-[-5px] transition-all duration-300 overflow-hidden relative group">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center text-2xl mb-6 mx-auto">
+                        <i class="fas fa-history"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-blue-900 mb-4">Sejarah Kami</h3>
+                    <p class="text-slate-700 leading-relaxed">
+                        Berdiri pada tahun 1995 dengan luas 800m², kini Masjid Sabilillah telah menjadi pusat kegiatan keagamaan bagi lebih dari 2.000 jamaah tetap.
+                    </p>
+                    <div class="mt-6 pt-6 border-t border-blue-100">
+                        <a href="#" class="text-blue-700 hover:text-blue-900 transition flex items-center justify-center mx-auto w-fit font-medium">
+                            Selengkapnya <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jadwal Sholat Section -->
+    <!-- Jadwal Sholat Section -->
+<section id="jadwal-sholat" class="py-20 bg-blue-50">
+    <div class="container mx-auto px-4 text-center">
+        <h2 class="text-4xl md:text-5xl font-bold font-heading text-blue-900 mb-4 inline-block relative">
+            Jadwal Sholat
+            <span class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-blue-500 rounded"></span>
+        </h2>
+        <p class="text-slate-600 text-lg mb-12 max-w-3xl mx-auto" id="jadwal-tanggal">
+            <i class="fas fa-map-marker-alt mr-2 text-blue-600"></i>Memuat lokasi...
+        </p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 max-w-6xl mx-auto" id="jadwal-sholat-container">
+            <p id="loading-jadwal" class="col-span-full text-xl text-blue-700 font-medium">
+                <i class="fas fa-spinner animate-spin mr-3"></i>Memuat jadwal sholat...
+            </p>
+            <p id="error-jadwal" class="col-span-full text-xl text-red-600 hidden">
+                <i class="fas fa-exclamation-circle mr-3"></i>Gagal memuat jadwal. Silakan coba lagi.
+            </p>
+        </div>
+        
+        <div class="mt-12">
+            <a href="#" class="inline-flex items-center text-blue-700 hover:text-blue-900 transition text-lg font-medium font-semibold">
+                Lihat Jadwal Bulanan <i class="fas fa-arrow-right ml-2"></i>
+            </a>
+        </div>
+    </div>
+</section>
+
+    <!-- Kegiatan Section -->
+    <section id="kegiatan" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold font-heading text-blue-900 mb-4 inline-block relative">
+                    Kegiatan Kami
+                    <span class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-blue-500 rounded"></span>
+                </h2>
+                <p class="text-slate-600 text-lg mt-8">
+                    Program-program rutin kami dirancang untuk memperkuat iman, memperluas ilmu, dan mempererat silaturahmi antar jamaah.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:translate-y-[-5px] transition-all duration-300 group border border-blue-100">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1541368698593-24106f70b98c?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Kajian" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-8">
+                        <span class="inline-block px-4 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4">Rutin Setiap Kamis</span>
+                        <h3 class="text-2xl font-bold font-heading text-blue-900 mb-3">Kajian Kitab Kuning</h3>
+                        <p class="text-slate-700 mb-5">
+                            Pembahasan mendalam kitab-kitab klasik Islam dengan metode kontekstual untuk kehidupan modern.
+                        </p>
+                        <div class="flex items-center justify-between pt-5 border-t border-blue-100">
+                            <span class="text-blue-700 font-medium"><i class="far fa-clock mr-2"></i>19:30 - 21:30 WIB</span>
+                            <a href="#" class="text-blue-700 hover:text-blue-900 transition font-medium"><i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:translate-y-[-5px] transition-all duration-300 group border border-blue-100">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1505238680356-66786043a076?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="TPQ" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-8">
+                        <span class="inline-block px-4 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium mb-4">Setiap Sabtu - Minggu</span>
+                        <h3 class="text-2xl font-bold font-heading text-blue-900 mb-3">TPQ Generasi Qur'ani</h3>
+                        <p class="text-slate-700 mb-5">
+                            Pendidikan Al-Qur'an untuk anak-anak usia 5-12 tahun dengan metode pembelajaran interaktif dan menyenangkan.
+                        </p>
+                        <div class="flex items-center justify-between pt-5 border-t border-blue-100">
+                            <span class="text-blue-700 font-medium"><i class="far fa-clock mr-2"></i>08:00 - 11:00 WIB</span>
+                            <a href="#" class="text-blue-700 hover:text-blue-900 transition font-medium"><i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-2xl shadow-md overflow-hidden hover:shadow-xl hover:translate-y-[-5px] transition-all duration-300 group border border-blue-100">
+                    <div class="h-56 overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Baksos" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    </div>
+                    <div class="p-8">
+                        <span class="inline-block px-4 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium mb-4">Setiap Bulan</span>
+                        <h3 class="text-2xl font-bold font-heading text-blue-900 mb-3">Bakti Sosial Komunitas</h3>
+                        <p class="text-slate-700 mb-5">
+                            Program distribusi sembako, pengobatan gratis, dan santunan untuk dhuafa di lingkungan sekitar masjid.
+                        </p>
+                        <div class="flex items-center justify-between pt-5 border-t border-blue-100">
+                            <span class="text-blue-700 font-medium"><i class="far fa-clock mr-2"></i>Setiap Ahad Pagi</span>
+                            <a href="#" class="text-blue-700 hover:text-blue-900 transition font-medium"><i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donasi Section -->
+    <section id="donasi" class="py-20 bg-blue-50">
+        <div class="container mx-auto px-4 max-w-6xl">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold font-heading text-blue-900 mb-4 inline-block relative">
+                    Salurkan Donasi
+                    <span class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-blue-500 rounded"></span>
+                </h2>
+                <p class="text-slate-600 text-lg max-w-3xl mx-auto">
+                    Setiap donasi yang Anda berikan akan digunakan untuk kemajuan masjid dan program-program kemanusiaan yang kami selenggarakan.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
+                <div class="bg-white border-t-4 border-blue-600 p-8 rounded-2xl shadow-md text-center hover:shadow-lg transition-all duration-300">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center text-2xl mb-6 mx-auto">
+                        <i class="fas fa-hand-holding-heart"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-blue-900 mb-4">Zakat & Infak</h3>
+                    <p class="text-slate-700 mb-6">
+                        Salurkan zakat, infak, dan shadaqah Anda untuk program kemanusiaan dan pembangunan masjid.
+                    </p>
+                    <div class="mt-4">
+                        <span class="inline-block px-4 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium">
+                            80% untuk program sosial
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="bg-white border-t-4 border-blue-500 p-8 rounded-2xl shadow-md text-center hover:shadow-lg transition-all duration-300">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-2xl mb-6 mx-auto">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-blue-900 mb-4">Wakaf Pendidikan</h3>
+                    <p class="text-slate-700 mb-6">
+                        Dukung program pendidikan Al-Qur'an, kajian rutin, dan pengembangan sumber daya manusia.
+                    </p>
+                    <div class="mt-4">
+                        <span class="inline-block px-4 py-1 bg-blue-100 text-blue-600 rounded-full text-sm font-medium">
+                            100% untuk pendidikan
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="bg-white border-t-4 border-blue-700 p-8 rounded-2xl shadow-md text-center hover:shadow-lg transition-all duration-300">
+                    <div class="w-16 h-16 bg-blue-100 text-blue-800 rounded-xl flex items-center justify-center text-2xl mb-6 mx-auto">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-blue-900 mb-4">Wakaf Fisik</h3>
+                    <p class="text-slate-700 mb-6">
+                        Berwakaf untuk pembangunan fasilitas masjid, perpustakaan, dan ruang kelas baru.
+                    </p>
+                    <div class="mt-4">
+                        <span class="inline-block px-4 py-1 bg-blue-100 text-blue-800 rounded-full text-sm font-medium">
+                            Proyek sedang berjalan
+                        </span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-blue-900 p-10 rounded-3xl shadow-2xl max-w-4xl mx-auto">
+                <div class="text-center mb-8">
+                    <div class="inline-block bg-blue-800 text-white w-16 h-16 rounded-full flex items-center justify-center text-2xl mb-4">
+                        <i class="fas fa-qrcode"></i>
+                    </div>
+                    <h3 class="text-2xl font-bold font-heading text-white mb-2">Rekening Donasi Resmi</h3>
+                    <p class="text-blue-200 text-sm">Transfer ke rekening berikut dan konfirmasi melalui WhatsApp</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                    <div class="bg-blue-800 p-6 rounded-2xl space-y-4">
+                        <div class="flex items-start">
+                            <div class="text-white mt-1 mr-3">
+                                <i class="fas fa-university text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-blue-200 text-sm">Bank Syariah Indonesia</p>
+                                <p class="text-xl font-bold text-white mt-1">7123 456 789</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-white mt-1 mr-3">
+                                <i class="fas fa-user text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-blue-200 text-sm">Atas Nama</p>
+                                <p class="font-semibold text-white mt-1">DKM Masjid Sabilillah</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start">
+                            <div class="text-white mt-1 mr-3">
+                                <i class="fas fa-file-invoice text-xl"></i>
+                            </div>
+                            <div>
+                                <p class="text-blue-200 text-sm">Kode Unik</p>
+                                <p class="text-white mt-1">Tanggal lahir Anda (DDMM)</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-blue-800 p-6 rounded-2xl flex flex-col items-center justify-center text-center">
+                        <div class="mb-4">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=7123456789" alt="QRIS Donasi" class="w-40 h-40 object-cover rounded-xl border-2 border-blue-400">
+                        </div>
+                        <p class="text-blue-200 mb-2">Scan QR Code untuk donasi cepat</p>
+                        <span class="text-white font-medium text-lg">BSI Virtual Account</span>
+                    </div>
+                </div>
+                
+                <div class="mt-8 text-center">
+                    <p class="text-blue-200 text-sm mb-6 font-medium">Konfirmasi donasi dan minta bukti transfer:</p>
+                    <a href="https://wa.me/6281234567890" class="inline-flex items-center bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition duration-300 shadow-lg hover:shadow-xl">
+                        <i class="fab fa-whatsapp mr-3 text-2xl"></i> 
+                        <span>Konfirmasi via WhatsApp</span>
+                    </a>
+                    <p class="text-xs text-blue-100 mt-4 opacity-90">*Seluruh donasi akan dilaporkan secara transparan melalui website dan bulletin bulanan</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Kontak Section -->
+    <section id="kontak" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16 max-w-3xl mx-auto">
+                <h2 class="text-4xl md:text-5xl font-bold font-heading text-blue-900 mb-4 inline-block relative">
+                    Hubungi Kami
+                    <span class="absolute bottom-[-10px] left-1/2 transform -translate-x-1/2 w-20 h-1 bg-blue-500 rounded"></span>
+                </h2>
+                <p class="text-slate-600 text-lg mt-8">
+                    Kami siap menerima pertanyaan, saran, atau informasi lebih lanjut mengenai kegiatan Masjid Sabilillah.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
+                <div class="bg-white p-10 rounded-2xl shadow-md border border-blue-100">
+                    <h3 class="text-2xl font-bold font-heading text-blue-900 mb-8 flex items-center">
+                        <i class="fas fa-info-circle mr-3 text-blue-700"></i>
+                        Informasi Kontak
+                    </h3>
+                    
+                    <div class="space-y-7">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-blue-100 text-blue-700 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-map-marker-alt text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-lg mb-1 text-blue-900">Alamat</h4>
+                                <p class="text-slate-700 leading-relaxed">
+                                    Jl. Veteran No. 45, Ketawanggede,<br>Kec. Lowokwaru, Kota Malang,<br>Jawa Timur 65145
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-phone-alt text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-lg mb-1 text-blue-900">Telepon</h4>
+                                <p class="text-slate-700">
+                                    <a href="tel:+62341123456" class="hover:text-blue-800 transition">+62 341 123456</a><br>
+                                    <a href="tel:+6281234567890" class="hover:text-blue-800 transition">+62 812 3456 7890</a>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-blue-100 text-blue-800 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-envelope text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-lg mb-1 text-blue-900">Email</h4>
+                                <p class="text-slate-700">
+                                    <a href="mailto:info@masjidsabilillah.org" class="hover:text-blue-800 transition">info@masjidsabilillah.org</a><br>
+                                    <a href="mailto:dkm@masjidsabilillah.org" class="hover:text-blue-800 transition">dkm@masjidsabilillah.org</a>
+                                </p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-blue-100 text-blue-900 rounded-xl flex items-center justify-center flex-shrink-0 mt-1">
+                                <i class="fas fa-clock text-xl"></i>
+                            </div>
+                            <div class="ml-4">
+                                <h4 class="font-bold text-lg mb-1 text-blue-900">Jam Operasional</h4>
+                                <p class="text-slate-700">
+                                    Senin - Jumat: 08.00 - 17.00 WIB<br>
+                                    Sabtu - Minggu: 08.00 - 15.00 WIB<br>
+                                    (Kecuali waktu sholat Jumat)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white p-10 rounded-2xl shadow-md border border-blue-100">
+                    <h3 class="text-2xl font-bold font-heading text-blue-900 mb-8 flex items-center">
+                        <i class="fas fa-location-arrow mr-3 text-blue-700"></i>
+                        Lokasi Masjid
+                    </h3>
+                    
+                    <div class="h-80 rounded-xl overflow-hidden mb-8 shadow-md border border-blue-200">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.3719068627853!2d112.62551597455737!3d-7.942727975394052!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd62848c65c3c33%3A0x3c5b82604b7a2c0f!2sMasjid%20Sabilillah!5e0!3m2!1sen!2sid!4v1700650028988!5m2!1sen!2sid" 
+                            width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" class="w-full h-full">
+                        </iframe>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-4">
+                        <a href="#" class="flex-1 min-w-[120px] bg-blue-700 hover:bg-blue-800 text-white font-medium py-3 px-4 rounded-xl text-center transition transform hover:-translate-y-1">
+                            <i class="fab fa-facebook-f mr-2"></i> Facebook
+                        </a>
+                        <a href="#" class="flex-1 min-w-[120px] bg-blue-600 hover:bg-blue-700 text-white font-medium py-3 px-4 rounded-xl text-center transition transform hover:-translate-y-1">
+                            <i class="fab fa-instagram mr-2"></i> Instagram
+                        </a>
+                        <a href="#" class="flex-1 min-w-[120px] bg-red-600 hover:bg-red-700 text-white font-medium py-3 px-4 rounded-xl text-center transition transform hover:-translate-y-1">
+                            <i class="fab fa-youtube mr-2"></i> YouTube
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 border-t border-blue-800 text-blue-200 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
+                <div class="md:col-span-1">
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="bg-white w-12 h-12 rounded-full flex items-center justify-center">
+                            <i class="fas fa-mosque text-blue-900 text-2xl"></i>
+                        </div>
+                        <span class="text-2xl font-bold font-heading text-white">Masjid Sabilillah</span>
+                    </div>
+                    <p class="text-blue-100 mb-6 leading-relaxed max-w-xs">
+                        Rumah spiritual untuk umat yang mengedepankan kemuliaan akhlak dan kebersamaan dalam beribadah.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="w-10 h-10 rounded-full bg-blue-800 flex items-center justify-center hover:bg-white hover:text-blue-900 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-blue-800 flex items-center justify-center hover:bg-white hover:text-blue-900 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-blue-800 flex items-center justify-center hover:bg-white hover:text-blue-900 transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 rounded-full bg-blue-800 flex items-center justify-center hover:bg-white hover:text-blue-900 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-1">
+                    <h3 class="text-xl font-bold text-white mb-6">Tautan Cepat</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#beranda" class="hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-blue-300 mr-2 text-xs"></i> Beranda</a></li>
+                        <li><a href="#tentang" class="hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-blue-300 mr-2 text-xs"></i> Tentang Kami</a></li>
+                        <li><a href="#jadwal-sholat" class="hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-blue-300 mr-2 text-xs"></i> Jadwal Sholat</a></li>
+                        <li><a href="#kegiatan" class="hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-blue-300 mr-2 text-xs"></i> Kegiatan</a></li>
+                        <li><a href="#donasi" class="hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-blue-300 mr-2 text-xs"></i> Donasi</a></li>
+                    </ul>
+                </div>
+                
+                <div class="md:col-span-1">
+                    <h3 class="text-xl font-bold text-white mb-6">Program Unggulan</h3>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-blue-300 mr-2 text-xs"></i> TPQ Generasi Qur'ani</a></li>
+                        <li><a href="#" class="hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-blue-300 mr-2 text-xs"></i> Kajian Kitab Kuning</a></li>
+                        <li><a href="#" class="hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-blue-300 mr-2 text-xs"></i> Bakti Sosial Rutin</a></li>
+                        <li><a href="#" class="hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-blue-300 mr-2 text-xs"></i> Pelatihan Dai Muda</a></li>
+                        <li><a href="#" class="hover:text-white transition flex items-center"><i class="fas fa-chevron-right text-blue-300 mr-2 text-xs"></i> Konseling Keluarga</a></li>
+                    </ul>
+                </div>
+                
+                <div class="md:col-span-1">
+                    <h3 class="text-xl font-bold text-white mb-6">Newsletter</h3>
+                    <p class="text-blue-100 mb-4">Berlangganan bulletin kami untuk mendapatkan informasi terbaru.</p>
+                    <div class="flex">
+                        <input type="email" placeholder="Email Anda" class="flex-1 px-4 py-3 bg-blue-800 text-white rounded-l-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
+                        <button class="bg-blue-700 hover:bg-blue-600 text-white px-4 py-3 font-medium rounded-r-lg transition">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                    <p class="text-xs mt-2 text-blue-300">Kami tidak akan pernah membagikan email Anda</p>
+                </div>
+            </div>
+            
+            <hr class="border-blue-800 my-10">
+            
+            <div class="flex flex-col md:flex-row justify-between items-center text-sm text-blue-300">
+                <p class="mb-4 md:mb-0">&copy; 2025 Masjid Sabilillah. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-white transition">Kebijakan Privasi</a>
+                    <a href="#" class="hover:text-white transition">Syarat & Ketentuan</a>
+                    <a href="#" class="hover:text-white transition">Transparansi Keuangan</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Script untuk Toggle Mobile Menu
+document.getElementById('mobile-menu-button').onclick = function() {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+};
+
+// Script untuk Efek Navbar saat Scroll
+const navbar = document.getElementById('navbar');
+const scrollThreshold = 50;
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > scrollThreshold) {
+        navbar.classList.add('bg-blue-900', 'shadow-lg');
+        navbar.classList.remove('bg-transparent');
+    } else {
+        navbar.classList.remove('bg-blue-900', 'shadow-lg');
+        navbar.classList.add('bg-transparent');
+    }
+});
+
+// Script untuk menutup mobile menu saat link diklik
+const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+mobileMenuLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.add('hidden');
+    });
+});
+
+// Script untuk Jadwal Sholat API
+async function getPrayerTimes() {
+    // Ganti dengan kota lokasi masjid Anda
+    const city = "Malang"; 
+    const country = "Indonesia";
+    const method = 5; // Metode Indonesia (Kemenag)
+
+    // URL API menggunakan timingsByCity
+    const apiUrl = `https://api.aladhan.com/v1/timingsByCity?city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&method=${method}`;
+
+    const jadwalContainer = document.getElementById('jadwal-sholat-container');
+    const loadingMessage = document.getElementById('loading-jadwal');
+    const errorMessage = document.getElementById('error-jadwal');
+    const jadwalTanggal = document.getElementById('jadwal-tanggal');
+
+    // Tampilkan loading, sembunyikan error
+    loadingMessage.classList.remove('hidden');
+    errorMessage.classList.add('hidden');
+    jadwalContainer.innerHTML = ''; // Bersihkan konten sebelumnya
+
+    try {
+        const response = await fetch(apiUrl);
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        const data = await response.json();
+
+        if (data && data.data && data.data.timings) {
+            const timings = data.data.timings;
+            const readableDate = data.data.date.readable;
+            const hijriDate = `${data.data.date.hijri.day} ${data.data.date.hijri.month.en} ${data.data.date.hijri.year} H`;
+            
+            // Update tanggal
+            jadwalTanggal.innerHTML = `
+                <i class="fas fa-map-marker-alt mr-2 text-blue-600"></i>${city}, ${country} - ${readableDate}<br>
+                <span class="text-blue-800 text-sm">(${hijriDate})</span>
+            `;
+            
+            loadingMessage.classList.add('hidden'); // Sembunyikan loading
+
+            // Mapping nama waktu sholat
+            const prayerNames = {
+                "Fajr": { name: "Subuh", icon: "fas fa-cloud-sun", color: "text-blue-700" },
+                "Sunrise": { name: "Terbit", icon: "fas fa-sun", color: "text-amber-600" },
+                "Dhuhr": { name: "Dzuhur", icon: "fas fa-sun", color: "text-blue-700" },
+                "Asr": { name: "Ashar", icon: "fas fa-mountain-sun", color: "text-blue-700" },
+                "Maghrib": { name: "Maghrib", icon: "fas fa-sunset", color: "text-blue-700" },
+                "Isha": { name: "Isya", icon: "fas fa-moon-stars", color: "text-blue-700" }
+            };
+
+            // Urutan waktu sholat yang akan ditampilkan
+            const displayOrder = ["Fajr", "Dhuhr", "Asr", "Maghrib", "Isha"];
+
+            // Buat kartu untuk setiap waktu sholat
+            displayOrder.forEach(prayerKey => {
+                if (timings[prayerKey]) {
+                    const prayer = prayerNames[prayerKey];
+                    const currentTime = new Date();
+                    const currentHour = currentTime.getHours();
+                    const currentMinute = currentTime.getMinutes();
+                    const [prayerHour, prayerMinute] = timings[prayerKey].split(':').map(Number);
+                    
+                    // Tentukan apakah ini waktu sholat saat ini
+                    const isCurrentPrayer = (
+                        (prayerKey === "Fajr" && currentHour < prayerHour) || 
+                        (prayerKey === "Dhuhr" && currentHour >= prayerHour && currentHour < 15) ||
+                        (prayerKey === "Asr" && currentHour >= 15 && currentHour < 18) ||
+                        (prayerKey === "Maghrib" && currentHour >= 18 && currentHour < 19) ||
+                        (prayerKey === "Isha" && currentHour >= 19)
+                    );
+
+                    let borderClass = "border-blue-200";
+                    let shadowClass = "hover:shadow-lg";
+                    if (isCurrentPrayer) {
+                        borderClass = "border-blue-500 ring-2 ring-blue-300";
+                        shadowClass = "shadow-md";
+                    }
+
+                    const card = `
+                        <div class="bg-white ${borderClass} p-6 rounded-2xl ${shadowClass} transition-all duration-300">
+                            <div class="${prayer.color} text-4xl mb-3">
+                                <i class="${prayer.icon}"></i>
+                            </div>
+                            <h3 class="text-xl font-bold mb-1 text-slate-800">${prayer.name}</h3>
+                            <p class="text-2xl font-bold text-blue-800">${timings[prayerKey]}</p>
+                            ${prayerKey === "Fajr" ? `<p class="text-slate-600 mt-1 text-sm">Imsak: ${timings["Imsak"] || "04:00"}</p>` : ''}
+                            ${prayerKey === "Dhuhr" ? `<p class="text-slate-600 mt-1 text-sm">Waktu Ashar: ${timings["Asr"]}</p>` : ''}
+                            ${isCurrentPrayer ? `<span class="inline-block mt-2 px-3 py-1 bg-blue-100 text-blue-800 text-xs font-medium rounded-full">Waktu Sholat Sekarang</span>` : ''}
+                        </div>
+                    `;
+                    jadwalContainer.innerHTML += card;
+                }
+            });
+        } else {
+            throw new Error("Data jadwal sholat tidak ditemukan.");
+        }
+    } catch (error) {
+        console.error("Error fetching prayer times:", error);
+        loadingMessage.classList.add('hidden');
+        errorMessage.classList.remove('hidden');
+        jadwalTanggal.innerHTML = `
+            <i class="fas fa-map-marker-alt mr-2 text-blue-600"></i>Gagal memuat jadwal - Silakan coba lagi
+        `;
+        jadwalContainer.innerHTML = ''; // Kosongkan container jika error
+        
+        // Tampilkan data dummy jika API gagal
+        displayDummyPrayerTimes();
+    }
+}
+
+// Fungsi untuk menampilkan data dummy jika API gagal
+function displayDummyPrayerTimes() {
+    const jadwalContainer = document.getElementById('jadwal-sholat-container');
+    const dummyData = {
+        "Fajr": "04:15",
+        "Dhuhr": "12:05",
+        "Asr": "15:28",
+        "Maghrib": "17:49",
+        "Isha": "19:02"
+    };
+    
+    const prayerNames = {
+        "Fajr": { name: "Subuh", icon: "fas fa-cloud-sun", color: "text-blue-700" },
+        "Dhuhr": { name: "Dzuhur", icon: "fas fa-sun", color: "text-blue-700" },
+        "Asr": { name: "Ashar", icon: "fas fa-mountain-sun", color: "text-blue-700" },
+        "Maghrib": { name: "Maghrib", icon: "fas fa-sunset", color: "text-blue-700" },
+        "Isha": { name: "Isya", icon: "fas fa-moon-stars", color: "text-blue-700" }
+    };
+
+    Object.keys(dummyData).forEach(prayerKey => {
+        const prayer = prayerNames[prayerKey];
+        const card = `
+            <div class="bg-white border border-blue-200 p-6 rounded-2xl hover:shadow-lg transition-all duration-300">
+                <div class="${prayer.color} text-4xl mb-3">
+                    <i class="${prayer.icon}"></i>
+                </div>
+                <h3 class="text-xl font-bold mb-1 text-slate-800">${prayer.name}</h3>
+                <p class="text-2xl font-bold text-blue-800">${dummyData[prayerKey]}</p>
+            </div>
+        `;
+        jadwalContainer.innerHTML += card;
+    });
+}
+
+// Panggil fungsi saat halaman dimuat
+document.addEventListener('DOMContentLoaded', function() {
+    // Animasi elemen saat halaman dimuat
+    const animatedElements = document.querySelectorAll('.animate-fade-in-up, .animate-slide-in-left, .animate-slide-in-right, .animate-scale-in');
+    
+    animatedElements.forEach(element => {
+        element.style.opacity = '0';
+    });
+    
+    function animateElements() {
+        animatedElements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            if (rect.top <= (window.innerHeight || document.documentElement.clientHeight) && 
+                rect.bottom >= 0 && 
+                element.style.opacity === '0') {
+                element.style.opacity = '1';
+                element.classList.add('animated');
+            }
+        });
+    }
+    
+    // Initial check dan scroll event
+    animateElements();
+    window.addEventListener('scroll', animateElements);
+    
+    // Fetch prayer times
+    getPrayerTimes();
+    
+    // Refresh jadwal setiap 24 jam
+    setInterval(getPrayerTimes, 24 * 60 * 60 * 1000);
+});
+    </script>
+</body>
+</html>

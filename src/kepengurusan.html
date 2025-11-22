@@ -4,10 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kepengurusan - Masjid Sabilillah</title>
-    <!-- Tautkan ke file CSS yang sudah dikompilasi -->
     <link href="./output.css" rel="stylesheet">
-    
-    <!-- Impor Font Awesome untuk ikon media sosial (jika digunakan di footer) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     
     <style>
@@ -17,161 +14,209 @@
         h1, h2, h3, h4, h5, h6 {
             font-family: 'Poppins', sans-serif;
         }
-        /* Mengatasi masalah scroll-padding untuk anchor link agar tidak tertutup navbar */
-        /* Sesuaikan dengan tinggi navbar yang mungkin berubah dengan efek blur/shadow */
         :target {
-            scroll-padding-top: px; /* Disesuaikan agar lebih dari tinggi navbar, misal 80px + sedikit padding */
+            scroll-padding-top: 80px;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        .animate-fade-in-up {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .animate-scale-in {
+            animation: scaleIn 0.6s ease-out forwards;
+        }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        .delay-800 { animation-delay: 0.8s; }
+        
+        .opacity-0 { opacity: 0; }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-8px);
+        }
+        
+        .gradient-overlay {
+            background: linear-gradient(135deg, rgba(10, 25, 47, 0.9) 0%, rgba(31, 41, 55, 0.8) 100%);
+        }
+        
+        .hero-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(56, 189, 248, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.1) 0%, transparent 50%);
         }
     </style>
 </head>
 <body class="font-sans antialiased text-masjid-text-secondary bg-masjid-mid-blue">
 
-    <!-- Navbar (Sama seperti di index.html) -->
+    <!-- Navbar -->
     <nav id="navbar" class="bg-masjid-dark-blue text-masjid-text-light p-4 shadow-lg fixed w-full z-50 transition-all duration-300 ease-in-out">
         <div class="container mx-auto flex justify-between items-center">
-            <!-- Logo Masjid Sabilillah -->
             <a href="index.html" class="flex items-center space-x-2">
-                <svg class="h-8 w-8 text-masjid-light-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0zM10 7v5l4 2m-8-8v.01"></path></svg>
                 <span class="text-2xl font-bold font-heading text-masjid-light-blue">Masjid Sabilillah</span>
             </a>
 
-            <!-- Navigasi Utama (Desktop) -->
             <ul class="hidden md:flex space-x-6 text-lg">
                 <li><a href="index.html#beranda" class="hover:text-masjid-light-blue transition duration-300">Beranda</a></li>
-                <li><a href="#kepengurusan-header" class="hover:text-masjid-light-blue transition duration-300">Kepengurusan</a></li> <!-- Link ke header halaman ini -->
-                <li><a href="index.html#jadwal-sholat" class="hover:text-masjid-light-blue transition duration-300">Jadwal Sholat</a></li>
+                <li><a href="index.html#tentang" class="hover:text-masjid-light-blue transition duration-300">Tentang</a></li>
+                <li><a href="index.html#jadwal-sholat" class="hover:text-masjid-light-blue transition duration-300">Jadwal</a></li>
                 <li><a href="index.html#kegiatan" class="hover:text-masjid-light-blue transition duration-300">Kegiatan</a></li>
-                <li><a href="index.html#galeri" class="hover:text-masjid-light-blue transition duration-300">Galeri</a></li>
-                <li><a href="index.html#donasi" class="hover:text-masjid-light-blue transition duration-300">Donasi</a></li>
+                <li><a href="#kepengurusan" class="hover:text-masjid-light-blue transition duration-300">Kepengurusan</a></li>
                 <li><a href="index.html#kontak" class="hover:text-masjid-light-blue transition duration-300">Kontak</a></li>
             </ul>
 
-            <!-- Tombol Donasi (Desktop) -->
             <a href="index.html#donasi" class="hidden md:block bg-masjid-light-blue text-white px-5 py-2 rounded-full font-semibold hover:bg-opacity-90 transition duration-300">Donasi</a>
 
-            <!-- Tombol Mobile Menu (Hamburger) -->
             <button class="md:hidden text-masjid-text-light focus:outline-none" id="mobile-menu-button">
                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
             </button>
         </div>
 
-        <!-- Mobile Menu -->
         <div class="md:hidden bg-masjid-dark-blue p-4 mt-2 hidden" id="mobile-menu">
             <ul class="flex flex-col space-y-3 text-lg">
                 <li><a href="index.html#beranda" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Beranda</a></li>
-                <li><a href="#kepengurusan-header" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Kepengurusan</a></li>
-                <li><a href="index.html#jadwal-sholat" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Jadwal Sholat</a></li>
+                <li><a href="index.html#tentang" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Tentang</a></li>
+                <li><a href="index.html#jadwal-sholat" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Jadwal</a></li>
                 <li><a href="index.html#kegiatan" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Kegiatan</a></li>
-                <li><a href="index.html#galeri" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Galeri</a></li>
-                <li><a href="index.html#donasi" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Donasi</a></li>
+                <li><a href="#kepengurusan" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Kepengurusan</a></li>
                 <li><a href="index.html#kontak" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Kontak</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Header untuk Halaman Kepengurusan -->
+    <!-- Hero Section -->
+    <section id="kepengurusan" class="relative bg-masjid-dark-blue h-96 flex items-center justify-center pt-16 overflow-hidden hero-pattern">
+        <div class="absolute inset-0 gradient-overlay"></div>
 
+        <div class="container mx-auto text-center relative z-10 px-4">
+            <h1 class="text-5xl md:text-6xl font-extrabold font-heading text-masjid-text-light leading-tight mb-4 opacity-0 animate-fade-in-up">
+                <span class="text-masjid-light-blue">Kepengurusan</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-masjid-text-secondary max-w-2xl mx-auto opacity-0 animate-fade-in-up delay-200">
+                Dewan Kemakmuran Masjid Sabilillah
+            </p>
+        </div>
+    </section>
 
     <!-- Section Daftar Pengurus -->
-    <section id="kepengurusan-detail" class="py-16 md:py-24 bg-masjid-mid-blue text-masjid-text-light">
+    <section class="py-20 bg-masjid-mid-blue text-masjid-text-light">
         <div class="container mx-auto px-4">
-            <h2 class="text-4xl font-bold font-heading text-masjid-light-blue text-center mb-12">Dewan Kemakmuran Masjid (DKM)</h2>
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                <!-- Contoh Kartu Pengurus 1 -->
-                <div class="bg-masjid-dark-blue rounded-lg shadow-xl overflow-hidden text-center p-6 hover:shadow-2xl transition-shadow duration-300">
-                    <img src="https://via.placeholder.com/150x150/3B82F6/FFFFFF?text=Foto" alt="Nama Pengurus" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-masjid-light-blue">
-                    <h3 class="text-2xl font-semibold font-heading text-masjid-text-light mb-1">Dr. H. Ahmad Fauzi</h3>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Pengurus 1 -->
+                <div class="bg-masjid-dark-blue rounded-2xl shadow-xl overflow-hidden text-center p-8 card-hover opacity-0 animate-scale-in delay-100">
+                    <div class="w-32 h-32 rounded-full mx-auto mb-4 bg-masjid-mid-blue flex items-center justify-center border-4 border-masjid-light-blue">
+                        <span class="text-5xl">👤</span>
+                    </div>
+                    <h3 class="text-xl font-semibold font-heading text-masjid-text-light mb-2">Dr. H. Ahmad Fauzi</h3>
                     <p class="text-masjid-light-blue font-medium mb-3">Ketua DKM</p>
-                    <p class="text-masjid-text-secondary text-sm">Bertanggung jawab atas visi dan misi masjid, serta memimpin seluruh kegiatan operasional.</p>
+                    <p class="text-masjid-text-secondary text-sm">Memimpin visi dan operasional masjid</p>
                 </div>
 
-                <!-- Contoh Kartu Pengurus 2 -->
-                <div class="bg-masjid-dark-blue rounded-lg shadow-xl overflow-hidden text-center p-6 hover:shadow-2xl transition-shadow duration-300">
-                    <img src="https://via.placeholder.com/150x150/3B82F6/FFFFFF?text=Foto" alt="Nama Pengurus" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-masjid-light-blue">
-                    <h3 class="text-2xl font-semibold font-heading text-masjid-text-light mb-1">Ibu Siti Aminah, S.Ag</h3>
+                <!-- Pengurus 2 -->
+                <div class="bg-masjid-dark-blue rounded-2xl shadow-xl overflow-hidden text-center p-8 card-hover opacity-0 animate-scale-in delay-200">
+                    <div class="w-32 h-32 rounded-full mx-auto mb-4 bg-masjid-mid-blue flex items-center justify-center border-4 border-masjid-light-blue">
+                        <span class="text-5xl">👤</span>
+                    </div>
+                    <h3 class="text-xl font-semibold font-heading text-masjid-text-light mb-2">Ibu Siti Aminah, S.Ag</h3>
                     <p class="text-masjid-light-blue font-medium mb-3">Sekretaris DKM</p>
-                    <p class="text-masjid-text-secondary text-sm">Mengelola administrasi, surat-menyurat, dan dokumentasi kegiatan masjid.</p>
+                    <p class="text-masjid-text-secondary text-sm">Mengelola administrasi dan dokumentasi</p>
                 </div>
 
-                <!-- Contoh Kartu Pengurus 3 -->
-                <div class="bg-masjid-dark-blue rounded-lg shadow-xl overflow-hidden text-center p-6 hover:shadow-2xl transition-shadow duration-300">
-                    <img src="https://via.placeholder.com/150x150/3B82F6/FFFFFF?text=Foto" alt="Nama Pengurus" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-masjid-light-blue">
-                    <h3 class="text-2xl font-semibold font-heading text-masjid-text-light mb-1">Bpk. Budi Santoso</h3>
+                <!-- Pengurus 3 -->
+                <div class="bg-masjid-dark-blue rounded-2xl shadow-xl overflow-hidden text-center p-8 card-hover opacity-0 animate-scale-in delay-300">
+                    <div class="w-32 h-32 rounded-full mx-auto mb-4 bg-masjid-mid-blue flex items-center justify-center border-4 border-masjid-light-blue">
+                        <span class="text-5xl">👤</span>
+                    </div>
+                    <h3 class="text-xl font-semibold font-heading text-masjid-text-light mb-2">Bpk. Budi Santoso</h3>
                     <p class="text-masjid-light-blue font-medium mb-3">Bendahara DKM</p>
-                    <p class="text-masjid-text-secondary text-sm">Bertanggung jawab atas pengelolaan keuangan, infaq, dan donasi masjid.</p>
+                    <p class="text-masjid-text-secondary text-sm">Mengelola keuangan dan donasi</p>
                 </div>
 
-                <!-- Contoh Kartu Pengurus 4 -->
-                <div class="bg-masjid-dark-blue rounded-lg shadow-xl overflow-hidden text-center p-6 hover:shadow-2xl transition-shadow duration-300">
-                    <img src="https://via.placeholder.com/150x150/3B82F6/FFFFFF?text=Foto" alt="Nama Pengurus" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-masjid-light-blue">
-                    <h3 class="text-2xl font-semibold font-heading text-masjid-text-light mb-1">Ustadz Hasan</h3>
+                <!-- Pengurus 4 -->
+                <div class="bg-masjid-dark-blue rounded-2xl shadow-xl overflow-hidden text-center p-8 card-hover opacity-0 animate-scale-in delay-400">
+                    <div class="w-32 h-32 rounded-full mx-auto mb-4 bg-masjid-mid-blue flex items-center justify-center border-4 border-masjid-light-blue">
+                        <span class="text-5xl">👤</span>
+                    </div>
+                    <h3 class="text-xl font-semibold font-heading text-masjid-text-light mb-2">Ustadz Hasan</h3>
                     <p class="text-masjid-light-blue font-medium mb-3">Bidang Dakwah & Pendidikan</p>
-                    <p class="text-masjid-text-secondary text-sm">Menyelaraskan program dakwah, kajian, dan pendidikan Islam di masjid.</p>
+                    <p class="text-masjid-text-secondary text-sm">Mengelola program dakwah dan kajian</p>
                 </div>
 
-                <!-- Tambahkan lebih banyak kartu pengurus sesuai kebutuhan -->
-                <div class="bg-masjid-dark-blue rounded-lg shadow-xl overflow-hidden text-center p-6 hover:shadow-2xl transition-shadow duration-300">
-                    <img src="https://via.placeholder.com/150x150/3B82F6/FFFFFF?text=Foto" alt="Nama Pengurus" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-masjid-light-blue">
-                    <h3 class="text-2xl font-semibold font-heading text-masjid-text-light mb-1">Ibu Rahmawati</h3>
+                <!-- Pengurus 5 -->
+                <div class="bg-masjid-dark-blue rounded-2xl shadow-xl overflow-hidden text-center p-8 card-hover opacity-0 animate-scale-in delay-500">
+                    <div class="w-32 h-32 rounded-full mx-auto mb-4 bg-masjid-mid-blue flex items-center justify-center border-4 border-masjid-light-blue">
+                        <span class="text-5xl">👤</span>
+                    </div>
+                    <h3 class="text-xl font-semibold font-heading text-masjid-text-light mb-2">Ibu Rahmawati</h3>
                     <p class="text-masjid-light-blue font-medium mb-3">Bidang Sosial & Kemasyarakatan</p>
-                    <p class="text-masjid-text-secondary text-sm">Mengkoordinasikan kegiatan sosial, santunan, dan bakti sosial.</p>
+                    <p class="text-masjid-text-secondary text-sm">Mengkoordinasikan kegiatan sosial</p>
                 </div>
 
-                 <div class="bg-masjid-dark-blue rounded-lg shadow-xl overflow-hidden text-center p-6 hover:shadow-2xl transition-shadow duration-300">
-                    <img src="https://via.placeholder.com/150x150/3B82F6/FFFFFF?text=Foto" alt="Nama Pengurus" class="w-32 h-32 rounded-full mx-auto mb-4 object-cover border-4 border-masjid-light-blue">
-                    <h3 class="text-2xl font-semibold font-heading text-masjid-text-light mb-1">Sdr. Fajar Hidayat</h3>
+                <!-- Pengurus 6 -->
+                <div class="bg-masjid-dark-blue rounded-2xl shadow-xl overflow-hidden text-center p-8 card-hover opacity-0 animate-scale-in delay-600">
+                    <div class="w-32 h-32 rounded-full mx-auto mb-4 bg-masjid-mid-blue flex items-center justify-center border-4 border-masjid-light-blue">
+                        <span class="text-5xl">👤</span>
+                    </div>
+                    <h3 class="text-xl font-semibold font-heading text-masjid-text-light mb-2">Sdr. Fajar Hidayat</h3>
                     <p class="text-masjid-light-blue font-medium mb-3">Koordinator Remaja Masjid</p>
-                    <p class="text-masjid-text-secondary text-sm">Membina dan mengelola kegiatan kepemudaan dan remaja masjid.</p>
+                    <p class="text-masjid-text-secondary text-sm">Membina kegiatan kepemudaan</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer (Sama seperti di index.html) -->
-    <footer class="bg-masjid-dark-blue text-masjid-text-secondary py-8">
-        <div class="container mx-auto px-4 text-center text-sm">
-            <p>&copy; 2025 Masjid Sabilillah. Hak Cipta Dilindungi Undang-Undang.</p>
-            <div class="flex justify-center space-x-4 mt-4">
-                <a href="#" class="hover:text-masjid-light-blue transition duration-300">Kebijakan Privasi</a>
-                <a href="#" class="hover:text-masjid-light-blue transition duration-300">Syarat & Ketentuan</a>
-            </div>
-            <div class="flex justify-center space-x-4 mt-4 text-2xl">
+    <!-- Footer -->
+    <footer class="bg-masjid-dark-blue text-masjid-text-secondary py-10">
+        <div class="container mx-auto px-4 text-center">
+            <div class="flex justify-center space-x-6 mb-6 text-3xl">
                 <a href="#" class="hover:text-masjid-light-blue transition duration-300"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" class="hover:text-masjid-light-blue transition duration-300"><i class="fab fa-instagram"></i></a>
                 <a href="#" class="hover:text-masjid-light-blue transition duration-300"><i class="fab fa-youtube"></i></a>
             </div>
+            <p class="text-sm">&copy; 2025 Masjid Sabilillah. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Script JavaScript (Sama seperti di index.html) -->
-    <script>
-        // Script untuk Toggle Mobile Menu
-        document.getElementById('mobile-menu-button').onclick = function() {
-            document.getElementById('mobile-menu').classList.toggle('hidden');
-        };
-
-        // Script untuk Efek Blur Navbar saat Scroll
-        const navbar = document.getElementById('navbar');
-        const scrollThreshold = 50; // Jarak scroll (px) sebelum efek blur diterapkan
-
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > scrollThreshold) {
-                navbar.classList.add('bg-opacity-80', 'backdrop-blur-md', 'shadow-xl');
-                navbar.classList.remove('bg-opacity-100'); 
-            } else {
-                navbar.classList.remove('bg-opacity-80', 'backdrop-blur-md', 'shadow-xl');
-                navbar.classList.add('bg-opacity-100'); 
-            }
-        });
-
-        // Script untuk menutup mobile menu saat link di dalamnya diklik (opsional, untuk UX)
-        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
-        mobileMenuLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('mobile-menu').classList.add('hidden');
-            });
-        });
-    </script>
-
+    <script src="./js/main.js"></script>
 </body>
 </html>
