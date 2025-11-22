@@ -30,6 +30,7 @@
     --text-5xl--line-height: 1;
     --text-6xl: 3.75rem;
     --text-6xl--line-height: 1;
+    --font-weight-medium: 500;
     --font-weight-semibold: 600;
     --font-weight-bold: 700;
     --font-weight-extrabold: 800;
@@ -248,8 +249,23 @@
   .mt-12 {
     margin-top: calc(var(--spacing) * 12);
   }
+  .mt-28 {
+    margin-top: calc(var(--spacing) * 28);
+  }
+  .mt-40 {
+    margin-top: calc(var(--spacing) * 40);
+  }
+  .mt-60 {
+    margin-top: calc(var(--spacing) * 60);
+  }
+  .mt-600 {
+    margin-top: calc(var(--spacing) * 600);
+  }
   .mr-4 {
     margin-right: calc(var(--spacing) * 4);
+  }
+  .mb-1 {
+    margin-bottom: calc(var(--spacing) * 1);
   }
   .mb-2 {
     margin-bottom: calc(var(--spacing) * 2);
@@ -290,6 +306,9 @@
   .h-8 {
     height: calc(var(--spacing) * 8);
   }
+  .h-32 {
+    height: calc(var(--spacing) * 32);
+  }
   .h-48 {
     height: calc(var(--spacing) * 48);
   }
@@ -301,6 +320,9 @@
   }
   .w-8 {
     width: calc(var(--spacing) * 8);
+  }
+  .w-32 {
+    width: calc(var(--spacing) * 32);
   }
   .w-full {
     width: 100%;
@@ -417,15 +439,16 @@
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
+  .border-4 {
+    border-style: var(--tw-border-style);
+    border-width: 4px;
+  }
   .border-t-4 {
     border-top-style: var(--tw-border-style);
     border-top-width: 4px;
   }
   .bg-black {
     background-color: var(--color-black);
-  }
-  .bg-\[url\(\'https\:\/\/via\.placeholder\.com\/1920x1080\/0A192F\/FFFFFF\?text\=Masjid\+Sabilillah\'\)\] {
-    background-image: url('https://via.placeholder.com/1920x1080/0A192F/FFFFFF?text=Masjid+Sabilillah');
   }
   .bg-\[url\(\'https\:\/\/via\.placeholder\.com\/1920x1080\/0A192F\/FFFFFF\?text\=Masjid\+Sabilillah\+Hero\'\)\] {
     background-image: url('https://via.placeholder.com/1920x1080/0A192F/FFFFFF?text=Masjid+Sabilillah+Hero');
@@ -484,6 +507,9 @@
   .pt-16 {
     padding-top: calc(var(--spacing) * 16);
   }
+  .pb-16 {
+    padding-bottom: calc(var(--spacing) * 16);
+  }
   .text-center {
     text-align: center;
   }
@@ -536,6 +562,10 @@
   .font-extrabold {
     --tw-font-weight: var(--font-weight-extrabold);
     font-weight: var(--font-weight-extrabold);
+  }
+  .font-medium {
+    --tw-font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-medium);
   }
   .font-semibold {
     --tw-font-weight: var(--font-weight-semibold);
