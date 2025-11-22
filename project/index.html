@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masjid Sabilillah - Pusat Ibadah dan Kegiatan Islam</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS (hasil build) -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="bg-gray-50">
+
+    <!-- Header/Navbar -->
+    <header class="bg-blue-900 text-white shadow-md">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center">
+                    <span class="text-white font-bold">M</span>
+                </div>
+                <h1 class="text-xl font-bold">Masjid Sabilillah</h1>
+            </div>
+
+            <nav class="hidden md:flex space-x-8">
+                <a href="#" class="hover:text-blue-200 transition-colors">Beranda</a>
+                <a href="#" class="hover:text-blue-200 transition-colors">Tentang</a>
+                <a href="#" class="hover:text-blue-200 transition-colors">Kegiatan</a>
+                <a href="#" class="hover:text-blue-200 transition-colors">Jadwal</a>
+                <a href="#" class="hover:text-blue-200 transition-colors">Kontak</a>
+            </nav>
+
+            <button class="md:hidden text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative bg-blue-900 text-white">
+        <div class="absolute inset-0 bg-black opacity-40 z-0"></div>
+
+        <div class="bg-cover bg-center h-screen"
+             style="background-image: url('https://images.unsplash.com/photo-1549924231-f129b911e442?auto=format&fit=crop&w=2070&q=80');">
+
+            <div class="container mx-auto px-4 h-full flex items-center relative z-10">
+                <div class="w-full md:w-1/2">
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">Masjid Sabilillah</h1>
+                    <p class="text-xl md:text-2xl mb-8">Pusat Ibadah dan Kegiatan Umat Islam</p>
+                    <p class="text-lg mb-8">
+                        Sebuah masjid yang menjadi mercusuar agama, pusat kegiatan umat, dan tempat pembinaan akhlak mulia.
+                    </p>
+
+                    <div class="flex space-x-4">
+                        <button class="bg-blue-700 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg">
+                            Jadwal Sholat
+                        </button>
+                        <button class="border-2 border-white hover:bg-white hover:text-blue-900 text-white font-semibold py-3 px-6 rounded-lg transition">
+                            Tentang Kami
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-blue-900 mb-12">Tentang Masjid Sabilillah</h2>
+
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <img src="https://images.unsplash.com/photo-1587132137056-4c6e38f8fb30?auto=format&fit=crop&w=1974&q=80"
+                         alt="Interior Masjid"
+                         class="rounded-lg shadow-lg">
+                </div>
+
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-semibold text-blue-800 mb-4">Sejarah & Visi</h3>
+                    <p class="text-gray-700 mb-4">
+                        Masjid Sabilillah didirikan pada tahun 1985 dengan tujuan menjadi pusat kegiatan keislaman yang menyatukan umat.
+                    </p>
+                    <p class="text-gray-700 mb-6">
+                        Visi kami adalah menciptakan masyarakat religius, berakhlak mulia, dan bermanfaat bagi bangsa.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-blue-800">Kapasitas</h4>
+                            <p class="text-blue-900">2,000 jamaah</p>
+                        </div>
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h4 class="font-semibold text-blue-800">Fasilitas</h4>
+                            <p class="text-blue-900">Perpustakaan, TK, Aula</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities Section -->
+    <section class="py-16 bg-blue-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-blue-900 mb-12">Kegiatan Rutin</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1560421683-258635f7c9d9?auto=format&fit=crop&w=1974&q=80"
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-blue-800 mb-2">Kajian Rutin</h3>
+                        <p class="text-gray-700 mb-4">Kajian ilmu agama setiap pekan dengan pemateri kompeten.</p>
+                        <a href="#" class="text-blue-700 font-medium hover:text-blue-900">Selengkapnya →</a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=2070&q=80"
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-blue-800 mb-2">TPA & Pendidikan</h3>
+                        <p class="text-gray-700 mb-4">Program TPA dengan kurikulum terstruktur untuk anak & remaja.</p>
+                        <a href="#" class="text-blue-700 font-medium hover:text-blue-900">Selengkapnya →</a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1580934896737-c18389d2e76a?auto=format&fit=crop&w=2070&q=80"
+                         class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold text-blue-800 mb-2">Bakti Sosial</h3>
+                        <p class="text-gray-700 mb-4">Kegiatan sosial untuk membantu masyarakat kurang mampu.</p>
+                        <a href="#" class="text-blue-700 font-medium hover:text-blue-900">Selengkapnya →</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Prayer Times -->
+    <section class="py-16 bg-blue-900 text-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Jadwal Sholat</h2>
+
+            <div class="bg-blue-800 rounded-lg p-8 max-w-2xl mx-auto">
+                <div class="text-center mb-6">
+                    <h3 class="text-xl font-semibold">Hari ini, 15 November 2023</h3>
+                    <p class="text-blue-200">Lokasi: Jakarta, Indonesia</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                    <div class="bg-blue-700 p-4 rounded-lg"><h4 class="font-semibold">Subuh</h4><p class="text-xl mt-2">04:30</p></div>
+                    <div class="bg-blue-700 p-4 rounded-lg"><h4 class="font-semibold">Dzuhur</h4><p class="text-xl mt-2">11:45</p></div>
+                    <div class="bg-blue-700 p-4 rounded-lg"><h4 class="font-semibold">Ashar</h4><p class="text-xl mt-2">15:10</p></div>
+                    <div class="bg-blue-700 p-4 rounded-lg"><h4 class="font-semibold">Maghrib</h4><p class="text-xl mt-2">17:55</p></div>
+                    <div class="bg-blue-700 p-4 rounded-lg"><h4 class="font-semibold">Isya</h4><p class="text-xl mt-2">19:10</p></div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-blue-900 mb-12">Hubungi Kami</h2>
+
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <h3 class="text-2xl font-semibold text-blue-800 mb-4">Informasi Kontak</h3>
+
+                    <div class="space-y-4">
+
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <svg class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"/><path stroke="currentColor" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-blue-800">Alamat</h4>
+                                <p class="text-gray-700">Jl. Kemakmuran No.123, Jakarta Selatan</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <svg class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M3 5a2 2 0 012-2h3.28l1.49 4.49a1 1 0 01-.5 1.21l-2.25 1.13a11 11 0 005.51 5.51l1.13-2.25a1 1 0 011.21-.5l4.49 1.49a2 2 0 01.68.95V19a2 2 0 01-2 2h-1C9.72 21 3 14.28 3 6V5z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-blue-800">Telepon</h4>
+                                <p class="text-gray-700">(021) 1234-5678</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start">
+                            <div class="bg-blue-100 p-3 rounded-full mr-4">
+                                <svg class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8"/><path stroke="currentColor" stroke-width="2" d="M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-blue-800">Email</h4>
+                                <p class="text-gray-700">info@masjidsabilillah.com</p>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Form -->
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-semibold text-blue-800 mb-4">Kirim Pesan</h3>
+
+                    <form class="space-y-4">
+                        <div>
+                            <label class="block text-gray-700 mb-2">Nama Lengkap</label>
+                            <input type="text" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 mb-2">Email</label>
+                            <input type="email" class="w-full px-4 py-2 border border-gray-300 rounded-lg">
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 mb-2">Pesan</label>
+                            <textarea rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-lg"></textarea>
+                        </div>
+
+                        <button type="submit" class="bg-blue-700 hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg w-full">
+                            Kirim Pesan
+                        </button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-blue-900 text-white py-8">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
+            <div class="mb-4 md:mb-0">
+                <div class="flex items-center space-x-2">
+                    <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center">
+                        <span class="font-bold">M</span>
+                    </div>
+                    <h2 class="text-xl font-bold">Masjid Sabilillah</h2>
+                </div>
+                <p class="mt-2 text-blue-200">Pusat Ibadah & Kegiatan Umat Islam</p>
+            </div>
+
+            <div class="text-center md:text-right">
+                <p class="text-blue-200">&copy; 2023 Masjid Sabilillah. All rights reserved.</p>
+
+                <div class="flex space-x-4 mt-2 justify-center md:justify-end">
+                    <a href="#" class="text-blue-200 hover:text-white">Facebook</a>
+                    <a href="#" class="text-blue-200 hover:text-white">Instagram</a>
+                    <a href="#" class="text-blue-200 hover:text-white">YouTube</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
