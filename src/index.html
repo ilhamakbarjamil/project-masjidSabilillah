@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masjid Sabilillah - Website Resmi</title>
+    <!-- Tautkan ke file CSS yang sudah dikompilasi -->
+    <link href="./output.css" rel="stylesheet">
+    
+    <!-- Impor Font Awesome untuk ikon media sosial -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    
+    <style>
+        /* Pastikan font yang Anda pilih diaplikasikan secara default, 
+           meskipun Tailwind sudah mencoba melakukannya melalui tailwind.config.js */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Poppins', sans-serif;
+        }
+        /* Mengatasi masalah scroll-padding untuk anchor link agar tidak tertutup navbar */
+        :target {
+            scroll-padding-top: 80px; /* Sesuaikan dengan tinggi navbar Anda */
+        }
+    </style>
+</head>
+<body class="font-sans antialiased text-masjid-text-secondary bg-masjid-mid-blue">
+
+    <!-- Navbar -->
+    <nav id="navbar" class="bg-masjid-dark-blue text-masjid-text-light p-4 shadow-lg fixed w-full z-50 transition-all duration-300 ease-in-out">
+        <div class="container mx-auto flex justify-between items-center">
+            <!-- Logo Masjid Sabilillah -->
+            <a href="#" class="flex items-center space-x-2">
+                <!-- Anda bisa mengganti SVG ini dengan gambar logo masjid Anda -->
+                <svg class="h-8 w-8 text-masjid-light-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0zM10 7v5l4 2m-8-8v.01"></path></svg>
+                <span class="text-2xl font-bold font-heading text-masjid-light-blue">Masjid Sabilillah</span>
+            </a>
+
+            <!-- Navigasi Utama (Desktop) -->
+            <ul class="hidden md:flex space-x-6 text-lg">
+                <li><a href="#beranda" class="hover:text-masjid-light-blue transition duration-300">Beranda</a></li>
+                <li><a href="#tentang" class="hover:text-masjid-light-blue transition duration-300">Tentang Kami</a></li>
+                <li><a href="#jadwal-sholat" class="hover:text-masjid-light-blue transition duration-300">Jadwal Sholat</a></li>
+                <li><a href="#kegiatan" class="hover:text-masjid-light-blue transition duration-300">Kegiatan</a></li>
+                <li><a href="#galeri" class="hover:text-masjid-light-blue transition duration-300">Galeri</a></li>
+                <li><a href="#donasi" class="hover:text-masjid-light-blue transition duration-300">Donasi</a></li>
+                <li><a href="#kontak" class="hover:text-masjid-light-blue transition duration-300">Kontak</a></li>
+            </ul>
+
+            <!-- Tombol Donasi (Desktop - disembunyikan jika sudah ada di navigasi) -->
+            <!-- <a href="#donasi" class="hidden md:block bg-masjid-light-blue text-white px-5 py-2 rounded-full font-semibold hover:bg-opacity-90 transition duration-300">Donasi</a> -->
+
+            <!-- Tombol Mobile Menu (Hamburger) -->
+            <button class="md:hidden text-masjid-text-light focus:outline-none" id="mobile-menu-button">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu (Tersembunyi secara default, akan di-toggle dengan JS) -->
+        <div class="md:hidden bg-masjid-dark-blue p-4 mt-2 hidden" id="mobile-menu">
+            <ul class="flex flex-col space-y-3 text-lg">
+                <li><a href="#beranda" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Beranda</a></li>
+                <li><a href="#tentang" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Tentang Kami</a></li>
+                <li><a href="#jadwal-sholat" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Jadwal Sholat</a></li>
+                <li><a href="#kegiatan" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Kegiatan</a></li>
+                <li><a href="#galeri" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Galeri</a></li>
+                <li><a href="#donasi" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Donasi</a></li>
+                <li><a href="#kontak" class="block py-2 px-3 hover:bg-masjid-mid-blue rounded transition duration-300">Kontak</a></li>
+                <!-- Tombol Donasi di mobile menu, bisa diaktifkan jika perlu -->
+                <!-- <li><a href="#donasi" class="block py-2 px-3 bg-masjid-light-blue text-white rounded-full text-center mt-3 hover:bg-opacity-90 transition duration-300">Donasi</a></li> -->
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="beranda" class="relative bg-masjid-dark-blue h-screen flex items-center justify-center pt-16">
+        <!-- Gambar latar belakang atau overlay -->
+        <!-- Ganti URL gambar placeholder dengan gambar masjid Anda yang sebenarnya -->
+        <div class="absolute inset-0 bg-[url('https://via.placeholder.com/1920x1080/0A192F/FFFFFF?text=Masjid+Sabilillah+Hero')] bg-cover bg-center opacity-30"></div>
+        <div class="absolute inset-0 bg-masjid-dark-blue opacity-50"></div> <!-- Overlay biru gelap -->
+
+        <div class="container mx-auto text-center relative z-10 px-4">
+            <h1 class="text-5xl md:text-6xl font-extrabold font-heading text-masjid-text-light leading-tight mb-4">
+                Selamat Datang di <span class="text-masjid-light-blue">Masjid Sabilillah</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-masjid-text-secondary max-w-3xl mx-auto mb-8">
+                Pusat spiritual dan komunitas untuk memperkuat iman dan silaturahmi.
+            </p>
+            <a href="#jadwal-sholat" class="border border-masjid-light-blue text-masjid-light-blue px-8 py-4 rounded-full text-lg font-semibold hover:bg-masjid-light-blue hover:text-white transition duration-300 inline-block">
+                Lihat Jadwal Sholat
+            </a>
+            <a href="#kegiatan" class="border border-masjid-light-blue text-masjid-light-blue px-8 py-4 rounded-full text-lg font-semibold hover:bg-masjid-light-blue hover:text-white transition duration-300 inline-block">
+                Kegiatan Kami
+            </a>
+        </div>
+    </section>
+
+    <!-- Tentang Kami Section -->
+    <section id="tentang" class="py-16 md:py-24 bg-masjid-mid-blue text-masjid-text-light">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold font-heading text-masjid-light-blue mb-8">Tentang Masjid Sabilillah</h2>
+            <p class="max-w-4xl mx-auto text-lg md:text-xl leading-relaxed text-masjid-text-secondary">
+                Masjid Sabilillah didirikan dengan visi untuk menjadi mercusuar spiritual bagi umat Muslim di wilayah ini. Kami berkomitmen untuk menyediakan tempat ibadah yang nyaman, pusat pendidikan Islam, dan wadah bagi kegiatan sosial kemasyarakatan yang positif. Sejak berdiri, Masjid Sabilillah telah menjadi rumah bagi berbagai kegiatan keagamaan dan sosial yang bertujuan untuk mempererat tali persaudaraan dan meningkatkan pemahaman Islam.
+            </p>
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
+                <div class="bg-masjid-dark-blue p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-semibold font-heading text-masjid-light-blue mb-3">Visi Kami</h3>
+                    <p class="text-masjid-text-secondary">Menjadi masjid yang modern, inklusif, dan inspiratif dalam membimbing umat menuju ketaqwaan.</p>
+                </div>
+                <div class="bg-masjid-dark-blue p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-semibold font-heading text-masjid-light-blue mb-3">Misi Kami</h3>
+                    <ul class="list-disc list-inside text-masjid-text-secondary space-y-1">
+                        <li>Mengadakan ibadah yang khusyuk.</li>
+                        <li>Mengembangkan pendidikan Islam.</li>
+                        <li>Menjadi pusat kegiatan sosial.</li>
+                    </ul>
+                </div>
+                <div class="bg-masjid-dark-blue p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-semibold font-heading text-masjid-light-blue mb-3">Sejarah Singkat</h3>
+                    <p class="text-masjid-text-secondary">Dibangun pada tahun 1990-an, Masjid Sabilillah telah melayani komunitas selama lebih dari tiga dekade.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Jadwal Sholat Section -->
+    <section id="jadwal-sholat" class="py-16 md:py-24 bg-masjid-dark-blue text-masjid-text-light">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold font-heading text-masjid-light-blue mb-8">Jadwal Sholat Hari Ini</h2>
+            <p class="text-masjid-text-secondary text-lg mb-8">Sabtu, 22 November 2025</p>
+
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-6 max-w-5xl mx-auto">
+                <!-- Waktu Sholat Card -->
+                <div class="bg-masjid-mid-blue p-6 rounded-lg shadow-xl border-t-4 border-masjid-light-blue hover:shadow-2xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-semibold font-heading text-masjid-text-light">Subuh</h3>
+                    <p class="text-4xl font-bold text-masjid-light-blue mt-2">04:30</p>
+                </div>
+                <div class="bg-masjid-mid-blue p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-semibold font-heading text-masjid-text-light">Dzuhur</h3>
+                    <p class="text-4xl font-bold text-masjid-light-blue mt-2">11:45</p>
+                </div>
+                <div class="bg-masjid-mid-blue p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-semibold font-heading text-masjid-text-light">Ashar</h3>
+                    <p class="text-4xl font-bold text-masjid-light-blue mt-2">15:00</p>
+                </div>
+                <div class="bg-masjid-mid-blue p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-semibold font-heading text-masjid-text-light">Maghrib</h3>
+                    <p class="text-4xl font-bold text-masjid-light-blue mt-2">17:55</p>
+                </div>
+                <div class="bg-masjid-mid-blue p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-semibold font-heading text-masjid-text-light">Isya</h3>
+                    <p class="text-4xl font-bold text-masjid-light-blue mt-2">19:10</p>
+                </div>
+            </div>
+            <p class="mt-8 text-lg text-masjid-text-secondary">Waktu sholat dapat berubah. Mohon cek kembali secara berkala.</p>
+        </div>
+    </section>
+
+    <!-- Kegiatan Terbaru Section -->
+    <section id="kegiatan" class="py-16 md:py-24 bg-masjid-mid-blue text-masjid-text-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold font-heading text-masjid-light-blue text-center mb-12">Kegiatan Terbaru</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Contoh Kartu Kegiatan 1 -->
+                <div class="bg-masjid-dark-blue rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                    <!-- Ganti URL gambar placeholder -->
+                    <img src="https://via.placeholder.com/600x400/1F2937/FFFFFF?text=Kajian+Rutin" alt="Kajian Rutin" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold font-heading text-masjid-text-light mb-2">Kajian Rutin Fiqih</h3>
+                        <p class="text-masjid-text-secondary text-sm mb-3">Setiap Hari Kamis Malam, Pukul 19:30 WIB</p>
+                        <p class="text-masjid-text-secondary leading-relaxed">Bergabunglah dalam kajian rutin kami membahas bab fiqih untuk meningkatkan pemahaman agama.</p>
+                        <a href="#" class="mt-4 inline-block text-masjid-light-blue hover:underline">Detail Kegiatan &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Contoh Kartu Kegiatan 2 -->
+                <div class="bg-masjid-dark-blue rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                    <!-- Ganti URL gambar placeholder -->
+                    <img src="https://via.placeholder.com/600x400/1F2937/FFFFFF?text=Workshop+Anak" alt="Workshop Anak" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold font-heading text-masjid-text-light mb-2">Workshop Kreatif Anak Islami</h3>
+                        <p class="text-masjid-text-secondary text-sm mb-3">Minggu, 24 November 2025, Pukul 09:00 WIB</p>
+                        <p class="text-masjid-text-secondary leading-relaxed">Ajak anak-anak Anda berpartisipasi dalam workshop yang mendidik dan menyenangkan.</p>
+                        <a href="#" class="mt-4 inline-block text-masjid-light-blue hover:underline">Detail Kegiatan &rarr;</a>
+                    </div>
+                </div>
+
+                <!-- Contoh Kartu Kegiatan 3 -->
+                <div class="bg-masjid-dark-blue rounded-lg shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300">
+                    <!-- Ganti URL gambar placeholder -->
+                    <img src="https://via.placeholder.com/600x400/1F2937/FFFFFF?text=Pengajian+Umum" alt="Pengajian Umum" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-semibold font-heading text-masjid-text-light mb-2">Pengajian Umum Bulanan</h3>
+                        <p class="text-masjid-text-secondary text-sm mb-3">Sabtu, 30 November 2025, Pukul 20:00 WIB</p>
+                        <p class="text-masjid-text-secondary leading-relaxed">Pengajian akbar dengan penceramah terkemuka, terbuka untuk umum.</p>
+                        <a href="#" class="mt-4 inline-block text-masjid-light-blue hover:underline">Detail Kegiatan &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-12">
+                <a href="#" class="bg-masjid-light-blue text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block">
+                    Lihat Semua Kegiatan
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeri Foto Section -->
+    <section id="galeri" class="py-16 md:py-24 bg-masjid-dark-blue text-masjid-text-light">
+        <div class="container mx-auto px-4">
+            <h2 class="text-4xl font-bold font-heading text-masjid-light-blue text-center mb-12">Galeri Foto Masjid</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Contoh Foto Galeri -->
+                <div class="relative group rounded-lg overflow-hidden shadow-lg">
+                    <!-- Ganti URL gambar placeholder -->
+                    <img src="https://via.placeholder.com/400x300/1F2937/FFFFFF?text=Masjid+View+1" alt="Masjid View 1" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-lg font-semibold">Sudut Interior</p>
+                    </div>
+                </div>
+                <div class="relative group rounded-lg overflow-hidden shadow-lg">
+                    <!-- Ganti URL gambar placeholder -->
+                    <img src="https://via.placeholder.com/400x300/1F2937/FFFFFF?text=Masjid+View+2" alt="Masjid View 2" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-lg font-semibold">Teras Masjid</p>
+                    </div>
+                </div>
+                <div class="relative group rounded-lg overflow-hidden shadow-lg">
+                    <!-- Ganti URL gambar placeholder -->
+                    <img src="https://via.placeholder.com/400x300/1F2937/FFFFFF?text=Masjid+View+3" alt="Masjid View 3" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-lg font-semibold">Kubah Indah</p>
+                    </div>
+                </div>
+                <div class="relative group rounded-lg overflow-hidden shadow-lg">
+                    <!-- Ganti URL gambar placeholder -->
+                    <img src="https://via.placeholder.com/400x300/1F2937/FFFFFF?text=Masjid+View+4" alt="Masjid View 4" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <div class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <p class="text-white text-lg font-semibold">Suasana Malam</p>
+                    </div>
+                </div>
+                <!-- Tambahkan lebih banyak gambar jika diperlukan -->
+            </div>
+            <div class="text-center mt-12">
+                <a href="#" class="bg-masjid-light-blue text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-opacity-90 transition duration-300 inline-block">
+                    Lihat Semua Foto
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donasi Section -->
+    <section id="donasi" class="py-16 md:py-24 bg-masjid-mid-blue text-masjid-text-light text-center">
+        <div class="container mx-auto px-4 max-w-4xl">
+            <h2 class="text-4xl font-bold font-heading text-masjid-light-blue mb-6">Salurkan Donasi Anda</h2>
+            <p class="text-lg md:text-xl text-masjid-text-secondary leading-relaxed mb-8">
+                Dukungan Anda sangat berarti bagi kelangsungan operasional dan program-program dakwah Masjid Sabilillah. Mari bersama-sama meraih keberkahan.
+            </p>
+            <div class="bg-masjid-dark-blue p-8 rounded-lg shadow-xl inline-block text-left">
+                <h3 class="text-2xl font-semibold font-heading text-masjid-text-light mb-4">Rekening Donasi</h3>
+                <p class="text-masjid-text-secondary text-lg mb-2"><strong>Bank Syariah Indonesia (BSI)</strong></p>
+                <p class="text-masjid-text-light text-xl font-bold mb-4">No. Rek: 7123456789</p>
+                <p class="text-masjid-text-secondary text-lg">Atas Nama: DKM Masjid Sabilillah</p>
+            </div>
+            <p class="text-masjid-text-secondary text-base mt-8">Konfirmasi donasi dapat dikirimkan ke [Nomor WhatsApp] atau [Email].</p>
+        </div>
+    </section>
+
+    <!-- Kontak Section -->
+    <section id="kontak" class="py-16 md:py-24 bg-masjid-dark-blue text-masjid-text-light">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-4xl font-bold font-heading text-masjid-light-blue mb-8">Hubungi Kami</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto text-left">
+                <div class="bg-masjid-mid-blue p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-semibold font-heading text-masjid-text-light mb-3">Informasi Kontak</h3>
+                    <p class="text-masjid-text-secondary mb-2">Jl. Contoh Alamat No. 123, Kota Malang</p>
+                    <p class="text-masjid-text-secondary mb-2">Email: info@masjidsabilillah.org</p>
+                    <p class="text-masjid-text-secondary mb-2">Telepon: (0341) 123-4567</p>
+                </div>
+                <div class="bg-masjid-mid-blue p-6 rounded-lg shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                    <h3 class="text-2xl font-semibold font-heading text-masjid-text-light mb-3">Peta Lokasi</h3>
+                    <!-- Contoh Google Maps Embed - Ganti dengan lokasi masjid Anda -->
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3951.693356983083!2d112.634674314774!3d-7.925769794276707!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd629472e361c47%3A0x633e7f4c5e317d7b!2sMasjid%20Sabilillah!5e0!3m2!1sid!2sid!4v1638201600000!5m2!1sid!2sid" 
+                        width="100%" height="200" style="border:0;" allowfullscreen="" loading="lazy">
+                    </iframe>
+                </div>
+            </div>
+            <!-- Formulir Kontak Sederhana (opsional) -->
+            <div class="mt-12 bg-masjid-mid-blue p-8 rounded-lg shadow-xl max-w-2xl mx-auto">
+                <h3 class="text-2xl font-semibold font-heading text-masjid-text-light mb-4">Kirim Pesan kepada Kami</h3>
+                <form class="space-y-4">
+                    <div>
+                        <input type="text" placeholder="Nama Anda" class="w-full p-3 rounded-md bg-masjid-dark-blue border border-masjid-mid-blue text-masjid-text-light focus:outline-none focus:ring-2 focus:ring-masjid-light-blue">
+                    </div>
+                    <div>
+                        <input type="email" placeholder="Email Anda" class="w-full p-3 rounded-md bg-masjid-dark-blue border border-masjid-mid-blue text-masjid-text-light focus:outline-none focus:ring-2 focus:ring-masjid-light-blue">
+                    </div>
+                    <div>
+                        <textarea placeholder="Pesan Anda" rows="5" class="w-full p-3 rounded-md bg-masjid-dark-blue border border-masjid-mid-blue text-masjid-text-light focus:outline-none focus:ring-2 focus:ring-masjid-light-blue"></textarea>
+                    </div>
+                    <button type="submit" class="bg-masjid-light-blue text-white px-6 py-3 rounded-md font-semibold hover:bg-opacity-90 transition duration-300">
+                        Kirim Pesan
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-masjid-dark-blue text-masjid-text-secondary py-8">
+        <div class="container mx-auto px-4 text-center text-sm">
+            <p>&copy; 2025 Masjid Sabilillah. Hak Cipta Dilindungi Undang-Undang.</p>
+            <div class="flex justify-center space-x-4 mt-4">
+                <a href="#" class="hover:text-masjid-light-blue transition duration-300">Kebijakan Privasi</a>
+                <a href="#" class="hover:text-masjid-light-blue transition duration-300">Syarat & Ketentuan</a>
+            </div>
+            <div class="flex justify-center space-x-4 mt-4 text-2xl">
+                <!-- Ikon media sosial dari Font Awesome -->
+                <a href="#" class="hover:text-masjid-light-blue transition duration-300"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-masjid-light-blue transition duration-300"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-masjid-light-blue transition duration-300"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Script JavaScript -->
+    <script>
+        // Script untuk Toggle Mobile Menu
+        document.getElementById('mobile-menu-button').onclick = function() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        };
+
+        // Script untuk Efek Blur Navbar saat Scroll
+        const navbar = document.getElementById('navbar');
+        const scrollThreshold = 50; // Jarak scroll (px) sebelum efek blur diterapkan
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > scrollThreshold) {
+                // Tambahkan kelas untuk efek blur, transparansi, dan bayangan
+                navbar.classList.add('bg-opacity-80', 'backdrop-blur-md', 'shadow-xl');
+                // Hapus kelas opacity penuh jika ada, memastikan efek transparansi
+                navbar.classList.remove('bg-opacity-100'); 
+            } else {
+                // Hapus kelas efek blur, transparansi, dan bayangan
+                navbar.classList.remove('bg-opacity-80', 'backdrop-blur-md', 'shadow-xl');
+                // Kembalikan ke opacity penuh saat di bagian atas halaman
+                navbar.classList.add('bg-opacity-100'); 
+            }
+        });
+
+        // Script untuk menutup mobile menu saat link di dalamnya diklik (opsional, untuk UX)
+        const mobileMenuLinks = document.querySelectorAll('#mobile-menu a');
+        mobileMenuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('mobile-menu').classList.add('hidden');
+            });
+        });
+    </script>
+
+</body>
+</html>
