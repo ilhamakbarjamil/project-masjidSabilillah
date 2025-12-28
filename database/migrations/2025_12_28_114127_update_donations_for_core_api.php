@@ -1,0 +1,29 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void {
+    Schema::table('donations', function (Blueprint $table) {
+        $table->string('payment_type')->nullable(); // bca, bri, qris, dll
+        $table->string('va_number')->nullable();
+        $table->text('payment_code')->nullable(); // Untuk QRIS atau link bayar
+    });
+}
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('donations', function (Blueprint $table) {
+            //
+        });
+    }
+};

@@ -41,11 +41,14 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // 3. FITUR INFAQ (MIDTRANS)
+// Tampilkan Halaman
 Route::get('/infaq', [DonationController::class, 'index'])->name('donations.index');
-Route::post('/infaq/pay', [DonationController::class, 'pay'])->middleware('auth')->name('donations.pay');
 
-// PENTING: Route Callback untuk Midtrans (Harus POST dan di luar middleware auth)
-// Jangan lupa exclude rute ini di bootstrap/app.php (CSRF)
+// Proses Bayar (Harus Login / Pakai Middleware auth jika perlu)
+Route::post('/infaq/pay', [DonationController::class, 'pay'])->name('donations.pay');
+Route::get('/infaq/check/{id}', [DonationController::class, 'checkStatus'])->name('donations.check');
+
+// Webhook Callback (Hati-hati CSRF!)
 Route::post('/infaq/callback', [DonationController::class, 'callback'])->name('donations.callback');
 
 // 4. GRUP RUTE AUTH (USER & ADMIN)

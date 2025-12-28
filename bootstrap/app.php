@@ -16,9 +16,19 @@ return Application::configure(basePath: dirname(__DIR__))
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
         ]);
     })
-    ->withMiddleware(function (Middleware $middleware) {
+->withMiddleware(function (Middleware $middleware) {
+    // Tambahkan pengecualian ini agar Midtrans bisa masuk
     $middleware->validateCsrfTokens(except: [
-        '/infaq/callback', // PENTING: Tambahkan ini agar Midtrans bisa masuk
+        'infaq/callback', 
+    ]);
+})
+
+// Di Laravel 11, kamu bisa menambahkannya di bootstrap/app.php bagian middleware
+->withMiddleware(function (Middleware $middleware) {
+    $middleware->trustProxies(at: '*'); // Percaya pada semua proxy (termasuk Ngrok)
+    
+    $middleware->validateCsrfTokens(except: [
+        '/infaq/callback',
     ]);
 })
     ->withExceptions(function (Exceptions $exceptions) {

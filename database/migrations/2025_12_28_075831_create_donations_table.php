@@ -9,15 +9,17 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
 {
     Schema::create('donations', function (Blueprint $table) {
         $table->id();
-        $table->string('external_id'); // ID Transaksi untuk Midtrans
+        $table->foreignId('user_id')->nullable()->constrained(); // Opsional, jika user login
+        $table->string('order_id')->unique(); // KUNCI UTAMA: Untuk pencocokan dengan Midtrans
         $table->string('donor_name');
-        $table->bigInteger('amount');
-        $table->string('status')->default('pending'); // pending, success, failed
-        $table->string('snap_token')->nullable(); // Token untuk memunculkan popup Midtrans
+        $table->string('payment_method'); // bca, bri, qris
+        $table->decimal('amount', 15, 2);
+        $table->string('status')->default('pending'); // pending, success, failed, expired
+        $table->json('payment_info')->nullable(); // PENTING: Simpan respon Midtrans (No VA / URL QRIS) di sini
         $table->timestamps();
     });
 }
