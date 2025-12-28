@@ -38,6 +38,9 @@ export default function AuthenticatedLayout({ user, header, children }) {
                                 <NavLink href={route('schedules.index')} active={route().current('schedules.*')}>
                                     Agenda
                                 </NavLink>
+                                <NavLink href={route('donations.index')} active={route().current('donations.*')}>
+    Infaq Digital
+</NavLink>
 
                                 {/* Menu Khusus Admin (Menggunakan user.role bukan auth.user.role) */}
                                 {user?.role === 'admin' && (

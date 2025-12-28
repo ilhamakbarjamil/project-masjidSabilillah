@@ -19,4 +19,10 @@
     <body class="font-sans antialiased">
         @inertia
     </body>
+
+    <!-- Midtrans Snap (Sandbox mode) -->
+<script type="text/javascript"
+  src="https://app.sandbox.midtrans.com/snap/snap.js"
+  data-client-key="{{ env('MIDTRANS_CLIENT_KEY') }}">
+</script>
 </html>
