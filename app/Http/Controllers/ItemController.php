@@ -44,13 +44,18 @@ class ItemController extends Controller
 
     // app/Http/Controllers/ItemController.php
 
-public function destroy(\App\Models\Item $item)
-{
-    if ($item->image) {
-        \Illuminate\Support\Facades\Storage::disk('public')->delete($item->image);
-    }
+    public function destroy($id)
+    {
+        $item = \App\Models\Item::find($id);
 
-    $item->delete();
-    return redirect()->back();
-}
+        if ($item) {
+            if ($item->image) {
+                \Illuminate\Support\Facades\Storage::disk('public')->delete($item->image);
+            }
+            $item->delete();
+        }
+
+        // Gunakan to_route untuk memaksa Inertia kembali ke halaman list dengan bersih
+        return to_route('inventory.index');
+    }
 }

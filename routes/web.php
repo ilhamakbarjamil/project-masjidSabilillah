@@ -63,9 +63,10 @@ Route::middleware('auth')->group(function () {
     // 5. KHUSUS ADMIN
     Route::middleware('admin')->group(function () {
         Route::post('/inventory', [ItemController::class, 'store'])->name('inventory.store');
+        Route::delete('/hapus-item-spesifik/{id}', [App\Http\Controllers\ItemController::class, 'destroy'])->name('inventory.destroy');
         // Gunakan rute unik yang kita buat tadi agar tidak 405
-        Route::delete('/hapus-barang/{item}', [ItemController::class, 'destroy'])->name('inventory.destroy');
-        
+        // Route::delete('/hapus-item-inventaris/{id}', [App\Http\Controllers\ItemController::class, 'destroy'])->name('inventory.destroy');  
+
         Route::get('/admin/loans', [LoanController::class, 'index'])->name('admin.loans.index');
         Route::patch('/admin/loans/{loan}', [LoanController::class, 'updateStatus'])->name('admin.loans.update');
         
