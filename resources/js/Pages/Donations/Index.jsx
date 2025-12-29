@@ -7,19 +7,22 @@ import {
     History, Users, ShieldCheck, Wallet,
     ArrowRight, X, Loader2,
     Zap, Lock, LayoutGrid, Heart,
-    PlayCircle
-} from 'lucide-react';
+    PlayCircle, Check
+} from 'lucide-react'; // Tambah icon Check
 
 export default function Index({ auth, donations = [], my_donations = [] }) {
     const [paymentResult, setPaymentResult] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    
+    // --- STATE BARU: MODAL SUKSES ---
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     // --- REFS UNTUK AUTO SCROLL ---
     const step1Ref = useRef(null);
     const step2Ref = useRef(null);
     const step3Ref = useRef(null);
-    const step4Ref = useRef(null); // Modal Result
-    const step5Ref = useRef(null); // Feed
+    const step4Ref = useRef(null); 
+    const step5Ref = useRef(null); 
 
     // --- STATE & LOGIKA TOUR PANDUAN ---
     const [tourStep, setTourStep] = useState(0); 
@@ -36,12 +39,10 @@ export default function Index({ auth, donations = [], my_donations = [] }) {
     // LOGIKA AUTO SCROLL SAAT NEXT
     useEffect(() => {
         const scrollOptions = { behavior: 'smooth', block: 'center' };
-        
         if (tourStep === 1) step1Ref.current?.scrollIntoView(scrollOptions);
         if (tourStep === 2) step2Ref.current?.scrollIntoView(scrollOptions);
         if (tourStep === 3) step3Ref.current?.scrollIntoView(scrollOptions);
         if (tourStep === 5) step5Ref.current?.scrollIntoView(scrollOptions);
-        
     }, [tourStep]);
 
     // SELALU MUNCUL SETIAP MASUK HALAMAN
@@ -78,11 +79,9 @@ export default function Index({ auth, donations = [], my_donations = [] }) {
 
     // Helper Highlight (Spotlight Effect)
     const getHighlightClass = (stepTarget) => {
-        // Logika: Jika step aktif, beri z-index tinggi (60) agar muncul di atas overlay internal (55)
         if (tourStep === stepTarget) {
             return "relative z-[60] bg-white ring-4 ring-emerald-400 ring-offset-4 transition-all duration-500 shadow-2xl scale-[1.02]";
         }
-        // Jika tidak aktif tapi sedang mode tur (1-3), biarkan di bawah overlay internal
         return "relative z-0 transition-all duration-500";
     };
 
@@ -120,8 +119,11 @@ export default function Index({ auth, donations = [], my_donations = [] }) {
                     const res = await axios.get(route('donations.check', paymentResult.id));
                     if (res.data.status === 'success') {
                         clearInterval(interval);
-                        alert("Alhamdulillah, Infaq Berhasil Diterima!");
-                        window.location.reload();
+                        
+                        // --- UPDATE: Ganti Alert dengan Modal Sukses ---
+                        setPaymentResult(null); // Tutup modal instruksi
+                        setShowSuccessModal(true); // Buka modal sukses
+                        // -----------------------------------------------
                     }
                 } catch (err) { console.error("Gagal cek status"); }
             }, 3000);
@@ -145,6 +147,11 @@ export default function Index({ auth, donations = [], my_donations = [] }) {
         }
     };
 
+    const handleCloseSuccess = () => {
+        setShowSuccessModal(false);
+        window.location.reload(); // Refresh halaman setelah user klik OK
+    };
+
     const formatIDR = (price) => new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0 }).format(price || 0);
 
     return (
@@ -158,7 +165,7 @@ export default function Index({ auth, donations = [], my_donations = [] }) {
                     <div className="fixed inset-0 bg-black/80 z-[50] backdrop-blur-sm transition-all duration-500"></div>
                 )}
 
-                {/* --- WELCOME MODAL (STEP 0.5) --- */}
+                {/* --- WELCOME MODAL (TOUR START) --- */}
                 {tourStep === 0.5 && (
                     <div className="fixed inset-0 z-[60] flex items-center justify-center bg-black/60 backdrop-blur-md p-4 animate-in zoom-in duration-300">
                         <div className="bg-white rounded-[2rem] max-w-sm w-full p-8 text-center shadow-2xl relative overflow-hidden">
@@ -180,7 +187,7 @@ export default function Index({ auth, donations = [], my_donations = [] }) {
                     </div>
                 )}
 
-                {/* --- FLOATING GUIDE BOX (STEP 1-5) --- */}
+                {/* --- FLOATING GUIDE BOX (TOUR STEPS) --- */}
                 {tourStep >= 1 && (
                     <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] w-full max-w-md px-4 animate-in slide-in-from-bottom duration-500">
                         <div className="bg-white p-6 rounded-2xl shadow-2xl border-2 border-emerald-500 flex items-center justify-between gap-4">
@@ -230,18 +237,9 @@ export default function Index({ auth, donations = [], my_donations = [] }) {
                         {/* KOLOM KIRI: FORMULIR */}
                         <div className="lg:col-span-7 space-y-8">
                             
-                            {/* TRIK CSS: 
-                                Jika Step 1, 2, atau 3 aktif, angkat Container Formulir ke Z-Index 60 (di atas backdrop).
-                                Tapi kita perlu menggelapkan bagian dalam yang tidak aktif. 
-                            */}
                             <div className={`bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-200 relative overflow-hidden transition-all duration-300 ${
                                 tourStep >= 1 && tourStep <= 3 ? "z-[60]" : "z-10"
                             }`}>
-                                
-                                {/* OVERLAY INTERNAL:
-                                    Muncul hanya saat Tur Step 1-3. Gunanya untuk menggelapkan bagian formulir yang TIDAK dipilih.
-                                    Z-Index 55 (di bawah element highlight yang z-60, tapi di atas konten biasa).
-                                */}
                                 {tourStep >= 1 && tourStep <= 3 && (
                                     <div className="absolute inset-0 bg-black/60 z-[55] transition-opacity duration-500"></div>
                                 )}
@@ -343,7 +341,7 @@ export default function Index({ auth, donations = [], my_donations = [] }) {
                         </div>
                     </div>
 
-                    {/* STEP 4: HIGHLIGHT MODAL RESULT (Simulasi atau Real) */}
+                    {/* STEP 4: HIGHLIGHT MODAL INSTRUKSI BAYAR */}
                     {paymentResult && (
                         <div className="fixed inset-0 z-[80] flex items-center justify-center bg-slate-900/60 backdrop-blur-md p-4 animate-in fade-in">
                             <div ref={step4Ref} className={`bg-white rounded-[2.5rem] max-w-md w-full p-8 relative shadow-2xl animate-in zoom-in-95 ${getHighlightClass(4)}`}>
@@ -356,10 +354,32 @@ export default function Index({ auth, donations = [], my_donations = [] }) {
                                         <div className="text-center space-y-4"><p className="text-[10px] font-black text-slate-400 uppercase">VA {paymentResult.payment_type.toUpperCase()}</p><div className="bg-white p-4 rounded-xl border border-slate-200 font-mono font-bold text-2xl text-slate-800 tracking-widest">{paymentResult.va_number || paymentResult.bill_key || paymentResult.va_numbers?.[0]?.va_number}</div><p className="text-[10px] text-slate-400 italic">Salin nomor di atas</p></div>
                                     )}
                                 </div>
-                                {/* <button onClick={() => window.location.reload()} className="w-full mt-6 bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-emerald-600 uppercase text-xs tracking-widest">Saya Sudah Bayar</button> */}
+                                <button onClick={() => window.location.reload()} className="w-full mt-6 bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-emerald-600 uppercase text-xs tracking-widest">Saya Sudah Bayar</button>
                             </div>
                         </div>
                     )}
+
+                    {/* --- MODAL SUKSES (NEW DESIGN) --- */}
+                    {showSuccessModal && (
+                        <div className="fixed inset-0 z-[90] flex items-center justify-center bg-emerald-900/40 backdrop-blur-md p-4 animate-in fade-in duration-300">
+                            <div className="bg-white rounded-[2.5rem] max-w-sm w-full p-8 text-center shadow-2xl relative overflow-hidden animate-in zoom-in-95 duration-300">
+                                <div className="w-20 h-20 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-6 animate-bounce">
+                                    <Check className="text-emerald-600 w-10 h-10" strokeWidth={4} />
+                                </div>
+                                <h3 className="text-2xl font-black text-slate-800 mb-2">Alhamdulillah!</h3>
+                                <p className="text-slate-500 text-sm mb-8 leading-relaxed">
+                                    Infaq Anda telah kami terima. Semoga menjadi amal jariyah yang tak terputus. Aamiin.
+                                </p>
+                                <button 
+                                    onClick={handleCloseSuccess} 
+                                    className="w-full bg-emerald-600 text-white font-bold py-4 rounded-2xl hover:bg-emerald-700 transition shadow-lg shadow-emerald-200 uppercase text-xs tracking-[0.2em]"
+                                >
+                                    Selesai
+                                </button>
+                            </div>
+                        </div>
+                    )}
+
                 </div>
             </div>
         </AuthenticatedLayout>
