@@ -34,7 +34,7 @@ class DonationController extends Controller
         $request->validate([
             'donor_name' => 'required',
             'amount' => 'required|numeric|min:10000',
-            'bank' => 'required'
+            'bank' => 'required' // bca, bri, mandiri, qris, gopay
         ]);
 
         $order_id = 'INFQ-' . time();
@@ -46,8 +46,9 @@ class DonationController extends Controller
             ],
         ];
 
-        if ($request->bank == 'qris') {
-            $params['payment_type'] = 'qris';
+        // Penentuan tipe pembayaran
+        if ($request->bank == 'qris' || $request->bank == 'gopay') {
+            $params['payment_type'] = $request->bank;
         } elseif ($request->bank == 'mandiri') {
             $params['payment_type'] = 'echannel';
             $params['echannel'] = ['bill_info1' => 'Infaq', 'bill_info2' => 'Masjid Sabilillah'];
@@ -65,20 +66,22 @@ class DonationController extends Controller
             $va_number = null;
             $payment_code = null;
 
-            // LOGIKA PARSING VA NUMBER (AGAR TIDAK KOSONG)
-            if ($request->bank == 'qris') {
-                $payment_code = $response->actions[0]->url; // Link Gambar QRIS
+            // PARSING RESPONS UNTUK GOPAY / QRIS
+            if ($request->bank == 'qris' || $request->bank == 'gopay') {
+                // Cari URL QR Code di dalam array actions
+                foreach ($response->actions as $action) {
+                    if ($action->name == 'generate-qr-code') {
+                        $payment_code = $action->url;
+                        break;
+                    }
+                }
             } elseif ($request->bank == 'mandiri') {
-                $va_number = $response->bill_key; // VA Mandiri
-                $payment_code = $response->biller_code; // Kode Perusahaan
-            } elseif ($request->bank == 'permata') {
-                $va_number = $response->permata_va_number;
+                $va_number = $response->bill_key;
+                $payment_code = $response->biller_code;
             } else {
-                // BCA, BRI, BNI menggunakan format ini
                 $va_number = $response->va_numbers[0]->va_number ?? null;
             }
 
-            // SIMPAN KE DATABASE
             $donation = Donation::create([
                 'user_id' => Auth::id(),
                 'external_id' => $order_id,
