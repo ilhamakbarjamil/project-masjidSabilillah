@@ -3,14 +3,27 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link } from '@inertiajs/react';
-import { Menu, X, Bell, ChevronDown, Search } from 'lucide-react';
+import { Link, usePage } from '@inertiajs/react'; 
+import { Menu, X, Bell, ChevronDown, Search, CheckCircle2, AlertCircle } from 'lucide-react'; 
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     const [scrolled, setScrolled] = useState(false);
 
-    // Efek scroll untuk navbar
+    // --- PERBAIKAN DI SINI: Tambahkan default value = {} ---
+    const { flash = {} } = usePage().props; 
+    const [showFlash, setShowFlash] = useState(false);
+
+    // Efek notifikasi (Cek jika flash ada isinya dulu)
+    useEffect(() => {
+        if (flash?.success || flash?.error || flash?.message) {
+            setShowFlash(true);
+            const timer = setTimeout(() => setShowFlash(false), 4000);
+            return () => clearTimeout(timer);
+        }
+    }, [flash]);
+
+    // Efek scroll navbar
     useEffect(() => {
         const handleScroll = () => setScrolled(window.scrollY > 20);
         window.addEventListener('scroll', handleScroll);
@@ -19,6 +32,34 @@ export default function Authenticated({ user, header, children }) {
 
     return (
         <div className="min-h-screen bg-[#f5f5f7]">
+            
+            {/* --- NOTIFIKASI TOAST --- */}
+            {/* Gunakan Optional Chaining (?.) agar tidak error jika flash undefined */}
+            {showFlash && (flash?.success || flash?.message) && (
+                <div className="fixed top-24 right-4 z-[60] animate-in slide-in-from-right fade-in duration-300">
+                    <div className="bg-emerald-600 text-white px-6 py-4 rounded-2xl shadow-xl shadow-emerald-200 flex items-center gap-3">
+                        <CheckCircle2 size={24} className="text-emerald-200" />
+                        <div>
+                            <p className="font-bold text-sm">Berhasil!</p>
+                            <p className="text-sm opacity-90">{flash.success || flash.message}</p>
+                        </div>
+                        <button onClick={() => setShowFlash(false)} className="ml-2 hover:bg-emerald-500 p-1 rounded-full"><X size={16}/></button>
+                    </div>
+                </div>
+            )}
+             {showFlash && flash?.error && (
+                <div className="fixed top-24 right-4 z-[60] animate-in slide-in-from-right fade-in duration-300">
+                    <div className="bg-red-500 text-white px-6 py-4 rounded-2xl shadow-xl shadow-red-200 flex items-center gap-3">
+                        <AlertCircle size={24} className="text-red-200" />
+                        <div>
+                            <p className="font-bold text-sm">Gagal!</p>
+                            <p className="text-sm opacity-90">{flash.error}</p>
+                        </div>
+                        <button onClick={() => setShowFlash(false)} className="ml-2 hover:bg-red-400 p-1 rounded-full"><X size={16}/></button>
+                    </div>
+                </div>
+            )}
+
             {/* NAVBAR */}
             <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
                 scrolled 
@@ -58,25 +99,28 @@ export default function Authenticated({ user, header, children }) {
                                 <NavLink href={route('donations.index')} active={route().current('donations.*')} className="font-medium">
                                     Infaq
                                 </NavLink>
+                                
+                                {/* --- MENU KHUSUS ADMIN --- */}
+                                {user.role === 'admin' && (
+                                    <NavLink href={route('admin.loans.index')} active={route().current('admin.loans.*')} className="font-medium text-emerald-700">
+                                        Cek Peminjaman
+                                    </NavLink>
+                                )}
                             </div>
                         </div>
 
                         <div className="hidden sm:flex sm:items-center sm:ms-6 gap-4">
-                            {/* Search Icon (Cosmetic) */}
                             <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors">
                                 <Search size={20} />
                             </button>
                             
-                            {/* Notification Bell */}
                             <button className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-full transition-colors relative">
                                 <Bell size={20} />
                                 <span className="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white"></span>
                             </button>
 
-                            {/* Divider */}
                             <div className="h-6 w-px bg-gray-300"></div>
 
-                            {/* Settings Dropdown */}
                             <div className="relative">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -108,7 +152,6 @@ export default function Authenticated({ user, header, children }) {
                             </div>
                         </div>
 
-                        {/* Hamburger Button */}
                         <div className="-me-2 flex items-center sm:hidden">
                             <button
                                 onClick={() => setShowingNavigationDropdown((previousState) => !previousState)}
@@ -120,21 +163,20 @@ export default function Authenticated({ user, header, children }) {
                     </div>
                 </div>
 
-                {/* Mobile Menu */}
                 <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden bg-white/90 backdrop-blur-xl border-b border-gray-200'}>
                     <div className="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
-                            Overview
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('inventory.index')} active={route().current('inventory.*')}>
-                            Inventaris
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('finance.index')} active={route().current('finance.*')}>
-                            Keuangan
-                        </ResponsiveNavLink>
-                        <ResponsiveNavLink href={route('articles.index')} active={route().current('articles.*')}>
-                            Berita
-                        </ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>Overview</ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('inventory.index')} active={route().current('inventory.*')}>Inventaris</ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('finance.index')} active={route().current('finance.*')}>Keuangan</ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('articles.index')} active={route().current('articles.*')}>Berita</ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('schedules.index')} active={route().current('schedules.*')}>Agenda</ResponsiveNavLink>
+                        <ResponsiveNavLink href={route('donations.index')} active={route().current('donations.*')}>Infaq</ResponsiveNavLink> 
+
+                        {user.role === 'admin' && (
+                            <ResponsiveNavLink href={route('admin.loans.index')} active={route().current('admin.loans.*')} className="text-emerald-700 font-bold">
+                                Cek Peminjaman
+                            </ResponsiveNavLink> 
+                        )}
                     </div>
 
                     <div className="pt-4 pb-4 border-t border-gray-200">
@@ -147,19 +189,14 @@ export default function Authenticated({ user, header, children }) {
                                 <div className="font-medium text-sm text-gray-500">{user.email}</div>
                             </div>
                         </div>
-
                         <div className="mt-3 space-y-1">
                             <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
-                            <ResponsiveNavLink method="post" href={route('logout')} as="button" className="text-red-600">
-                                Log Out
-                            </ResponsiveNavLink>
+                            <ResponsiveNavLink method="post" href={route('logout')} as="button" className="text-red-600">Log Out</ResponsiveNavLink>
                         </div>
                     </div>
                 </div>
             </nav>
 
-            {/* HEADER CONTENT (Title Bar) */}
-            {/* Kita berikan padding-top agar konten tidak tertutup navbar yang fixed */}
             <div className="pt-20 md:pt-24 pb-6"> 
                 {header && (
                     <header>
@@ -170,8 +207,7 @@ export default function Authenticated({ user, header, children }) {
                 )}
             </div>
 
-            {/* MAIN CONTENT */}
-            <main>
+            <main className="animate-in fade-in duration-500">
                 {children}
             </main>
         </div>

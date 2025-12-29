@@ -38,51 +38,44 @@ class DonationController extends Controller
         ]);
 
         $order_id = 'INFQ-' . time();
-
-        // Default params
         $params = [
-            'transaction_details' => [
-                'order_id' => $order_id,
-                'gross_amount' => (int)$request->amount,
-            ],
+            'transaction_details' => ['order_id' => $order_id, 'gross_amount' => (int)$request->amount],
             'customer_details' => [
                 'first_name' => $request->donor_name,
-                'email' => Auth::user()->email,
+                'email' => Auth::user()->email
             ],
         ];
 
-        // Logika berdasarkan tipe bank
         if ($request->bank == 'qris') {
             $params['payment_type'] = 'qris';
         } elseif ($request->bank == 'mandiri') {
             $params['payment_type'] = 'echannel';
-            $params['echannel'] = [
-                'bill_info1' => 'Infaq',
-                'bill_info2' => 'Masjid Sabilillah'
-            ];
+            $params['echannel'] = ['bill_info1' => 'Infaq', 'bill_info2' => 'Masjid Sabilillah'];
         } else {
             $params['payment_type'] = 'bank_transfer';
             $params['bank_transfer'] = ['bank' => $request->bank];
         }
 
         try {
-            $response = CoreApi::charge($params);
+            \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+            \Midtrans\Config::$isProduction = false;
+
+            $response = \Midtrans\CoreApi::charge($params);
 
             $va_number = null;
             $payment_code = null;
 
-            // PARSING RESPONS MIDTRANS (Agar tidak undefined)
+            // LOGIKA PARSING VA NUMBER (AGAR TIDAK KOSONG)
             if ($request->bank == 'qris') {
-                $payment_code = $response->actions[0]->url;
+                $payment_code = $response->actions[0]->url; // Link Gambar QRIS
             } elseif ($request->bank == 'mandiri') {
-                // Mandiri pakai Bill Key
-                $va_number = $response->bill_key;
-                $payment_code = $response->biller_code; // Simpan biller code di payment_code
+                $va_number = $response->bill_key; // VA Mandiri
+                $payment_code = $response->biller_code; // Kode Perusahaan
             } elseif ($request->bank == 'permata') {
                 $va_number = $response->permata_va_number;
             } else {
-                // BCA, BRI, BNI
-                $va_number = $response->va_numbers[0]->va_number;
+                // BCA, BRI, BNI menggunakan format ini
+                $va_number = $response->va_numbers[0]->va_number ?? null;
             }
 
             // SIMPAN KE DATABASE
@@ -104,32 +97,47 @@ class DonationController extends Controller
     }
 
     // Tambahkan fungsi ini di dalam class DonationController
-public function checkStatus($id)
-{
-    $donation = Donation::findOrFail($id);
-
-    // Jika di database kita masih pending, kita tanyakan ke server Midtrans
-    if ($donation->status === 'pending') {
+    public function checkStatus($id)
+    {
         try {
-            $statusMidtrans = (object) Transaction::status($donation->external_id);
-            
-            // Jika di Midtrans sudah lunas (settlement / capture)
-            if ($statusMidtrans->transaction_status == 'settlement' || $statusMidtrans->transaction_status == 'capture') {
-                $donation->update(['status' => 'success']);
-                
-                // Otomatis masukkan ke kas masjid (finance)
-                \App\Models\Finance::create([
-                    'description' => 'Infaq Online: ' . $donation->donor_name,
-                    'amount' => $donation->amount,
-                    'type' => 'income',
-                    'date' => now()
-                ]);
+            $donation = Donation::find($id);
+
+            if (!$donation) {
+                return response()->json(['status' => 'error', 'message' => 'Data tidak ditemukan'], 404);
             }
+
+            // Jika masih pending, coba sinkronkan dengan Midtrans
+            if ($donation->status === 'pending') {
+                // Pastikan Konfigurasi Midtrans sudah terpanggil
+                \Midtrans\Config::$serverKey = env('MIDTRANS_SERVER_KEY');
+                \Midtrans\Config::$isProduction = false;
+
+                try {
+                    $statusMidtrans = \Midtrans\Transaction::status($donation->external_id);
+                    $status = $statusMidtrans->transaction_status ?? null;
+
+                    if ($status == 'settlement' || $status == 'capture') {
+                        $donation->update(['status' => 'success']);
+
+                        // Input ke kas (Hanya jika belum ada untuk ID ini)
+                        $cekKas = \App\Models\Finance::where('description', 'LIKE', '%' . $donation->external_id . '%')->first();
+                        if (!$cekKas) {
+                            \App\Models\Finance::create([
+                                'description' => 'Infaq Online: ' . $donation->donor_name . ' (' . $donation->external_id . ')',
+                                'amount' => $donation->amount,
+                                'type' => 'income',
+                                'date' => now()
+                            ]);
+                        }
+                    }
+                } catch (\Exception $e) {
+                    // Jika transaksi belum ada di server Midtrans, biarkan pending
+                }
+            }
+
+            return response()->json(['status' => $donation->status]);
         } catch (\Exception $e) {
-            // Jika transaksi belum dibuat di Midtrans atau error lain
+            return response()->json(['status' => 'error', 'message' => $e->getMessage()], 500);
         }
     }
-
-    return response()->json(['status' => $donation->status]);
-}
 }

@@ -1,7 +1,10 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, useForm } from '@inertiajs/react';
-import { Calendar, Clock, User, MapPin, Plus, Trash2, Image as ImageIcon, Search } from 'lucide-react';
+import { 
+    Calendar, Clock, User, MapPin, Plus, Trash2, 
+    Image as ImageIcon, Search, LayoutList, MoreHorizontal 
+} from 'lucide-react';
 
 export default function Index({ auth, schedules = [] }) {
     const { data, setData, post, reset, errors, delete: destroy } = useForm({
@@ -28,33 +31,25 @@ export default function Index({ auth, schedules = [] }) {
         return new Date(dateString).toLocaleDateString('id-ID', options);
     };
 
-    const getDayAndMonth = (dateString) => {
-        const date = new Date(dateString);
-        return {
-            day: date.getDate(),
-            month: date.toLocaleDateString('id-ID', { month: 'short' }).toUpperCase()
-        };
-    };
-
     return (
         <AuthenticatedLayout
             user={auth.user}
-            header={<h2 className="font-bold text-2xl text-emerald-900 tracking-tight">Agenda & Kajian Masjid</h2>}
+            header={<h2 className="font-bold text-xl text-slate-800 tracking-tight">Agenda & Kajian</h2>}
         >
             <Head title="Agenda Masjid" />
 
             <div className="py-12 bg-slate-50 min-h-screen font-sans">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     
-                    {/* FORM ADMIN SECTION */}
+                    {/* FORM ADMIN SECTION (Hanya Admin) */}
                     {auth.user.role === 'admin' && (
-                        <div className="bg-white p-8 rounded-3xl shadow-lg shadow-emerald-100 border border-emerald-50 mb-16 relative overflow-hidden">
+                        <div className="bg-white p-8 rounded-[2.5rem] shadow-sm border border-slate-200 mb-12 relative overflow-hidden">
                             <div className="absolute top-0 right-0 w-64 h-64 bg-emerald-50 rounded-full -mr-16 -mt-16 opacity-50 blur-3xl pointer-events-none"></div>
                             
                             <div className="relative z-10">
-                                <h3 className="text-xl font-bold mb-8 flex items-center gap-3 text-slate-800 border-b border-slate-100 pb-4">
-                                    <div className="p-2 bg-emerald-100 rounded-lg text-emerald-600">
-                                        <Plus size={20} strokeWidth={3} />
+                                <h3 className="text-lg font-bold mb-8 flex items-center gap-3 text-slate-800">
+                                    <div className="p-2 bg-slate-100 rounded-xl text-slate-600">
+                                        <Plus size={20} strokeWidth={2.5} />
                                     </div>
                                     Buat Agenda Baru
                                 </h3>
@@ -62,41 +57,26 @@ export default function Index({ auth, schedules = [] }) {
                                 <form onSubmit={submit} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                                     {/* Judul */}
                                     <div className="lg:col-span-2 space-y-2">
-                                        <label className="text-sm font-semibold text-slate-600">Nama Kegiatan</label>
-                                        <input 
-                                            type="text" 
-                                            placeholder="Contoh: Kajian Rutin Ba'da Maghrib" 
-                                            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition bg-slate-50" 
-                                            value={data.title} 
-                                            onChange={e => setData('title', e.target.value)} 
-                                            required 
-                                        />
+                                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Nama Kegiatan</label>
+                                        <input type="text" placeholder="Contoh: Kajian Rutin" className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-0 focus:ring-2 focus:ring-emerald-500 font-bold text-slate-800 transition-all placeholder:text-slate-300" 
+                                            value={data.title} onChange={e => setData('title', e.target.value)} required />
                                     </div>
 
                                     {/* Ustadz */}
                                     <div className="lg:col-span-2 space-y-2">
-                                        <label className="text-sm font-semibold text-slate-600">Nama Ustadz / Pembicara</label>
+                                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Penceramah</label>
                                         <div className="relative">
-                                            <User size={18} className="absolute left-4 top-3.5 text-slate-400" />
-                                            <input 
-                                                type="text" 
-                                                placeholder="Ustadz Fulan, Lc." 
-                                                className="w-full pl-11 pr-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition bg-slate-50" 
-                                                value={data.ustadz_name} 
-                                                onChange={e => setData('ustadz_name', e.target.value)} 
-                                                required 
-                                            />
+                                            <User size={18} className="absolute left-5 top-4 text-slate-400" />
+                                            <input type="text" placeholder="Ustadz Fulan, Lc." className="w-full pl-12 pr-5 py-4 rounded-2xl bg-slate-50 border-0 focus:ring-2 focus:ring-emerald-500 font-bold text-slate-800 transition-all placeholder:text-slate-300" 
+                                                value={data.ustadz_name} onChange={e => setData('ustadz_name', e.target.value)} required />
                                         </div>
                                     </div>
 
                                     {/* Tipe & Tanggal */}
                                     <div className="space-y-2">
-                                        <label className="text-sm font-semibold text-slate-600">Jenis Kegiatan</label>
-                                        <select 
-                                            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition bg-slate-50 font-medium text-slate-700" 
-                                            value={data.type} 
-                                            onChange={e => setData('type', e.target.value)}
-                                        >
+                                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Jenis</label>
+                                        <select className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-0 focus:ring-2 focus:ring-emerald-500 font-bold text-slate-800 transition-all" 
+                                            value={data.type} onChange={e => setData('type', e.target.value)}>
                                             <option value="pengajian">Pengajian</option>
                                             <option value="khutbah">Khutbah Jumat</option>
                                             <option value="kegiatan">Lainnya</option>
@@ -104,55 +84,38 @@ export default function Index({ auth, schedules = [] }) {
                                     </div>
 
                                     <div className="space-y-2">
-                                        <label className="text-sm font-semibold text-slate-600">Tanggal</label>
-                                        <input 
-                                            type="date" 
-                                            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition bg-slate-50" 
-                                            value={data.date} 
-                                            onChange={e => setData('date', e.target.value)} 
-                                            required 
-                                        />
+                                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Tanggal</label>
+                                        <input type="date" className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-0 focus:ring-2 focus:ring-emerald-500 font-bold text-slate-800 transition-all" 
+                                            value={data.date} onChange={e => setData('date', e.target.value)} required />
                                     </div>
 
                                     <div className="space-y-2">
-                                        <label className="text-sm font-semibold text-slate-600">Jam Mulai</label>
-                                        <input 
-                                            type="time" 
-                                            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition bg-slate-50" 
-                                            value={data.time} 
-                                            onChange={e => setData('time', e.target.value)} 
-                                            required 
-                                        />
+                                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Jam</label>
+                                        <input type="time" className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-0 focus:ring-2 focus:ring-emerald-500 font-bold text-slate-800 transition-all" 
+                                            value={data.time} onChange={e => setData('time', e.target.value)} required />
                                     </div>
                                     
-                                    {/* Lokasi (Baru ditambahkan) */}
                                     <div className="space-y-2">
-                                        <label className="text-sm font-semibold text-slate-600">Lokasi</label>
-                                        <input 
-                                            type="text" 
-                                            placeholder="Masjid Utama / Aula"
-                                            className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-emerald-500 focus:ring-2 focus:ring-emerald-200 transition bg-slate-50" 
-                                            value={data.location} 
-                                            onChange={e => setData('location', e.target.value)} 
-                                            required 
-                                        />
+                                        <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1">Lokasi</label>
+                                        <input type="text" placeholder="Masjid Utama" className="w-full px-5 py-4 rounded-2xl bg-slate-50 border-0 focus:ring-2 focus:ring-emerald-500 font-bold text-slate-800 transition-all placeholder:text-slate-300" 
+                                            value={data.location} onChange={e => setData('location', e.target.value)} required />
                                     </div>
 
-                                    {/* Upload Gambar & Submit */}
-                                    <div className="lg:col-span-4 flex flex-col md:flex-row gap-4 items-end pt-4 border-t border-slate-100 mt-2">
+                                    {/* Upload & Submit */}
+                                    <div className="lg:col-span-4 flex flex-col md:flex-row gap-4 items-end pt-6 border-t border-slate-100 mt-2">
                                         <div className="flex-1 w-full">
-                                            <label className="text-sm font-semibold text-slate-600 mb-2 block">Poster / Gambar (Opsional)</label>
+                                            <label className="text-xs font-bold text-slate-400 uppercase tracking-widest ml-1 mb-2 block">Poster (Opsional)</label>
                                             <div className="flex items-center gap-3">
-                                                <label className="cursor-pointer flex items-center gap-2 px-4 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-lg transition text-sm font-medium">
-                                                    <ImageIcon size={18} /> Pilih File
+                                                <label className="cursor-pointer flex items-center gap-2 px-5 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl transition text-sm font-bold">
+                                                    <ImageIcon size={18} /> Pilih Gambar
                                                     <input type="file" className="hidden" onChange={e => setData('image', e.target.files[0])} />
                                                 </label>
-                                                {data.image && <span className="text-xs text-emerald-600 font-medium truncate">{data.image.name}</span>}
+                                                {data.image && <span className="text-xs text-emerald-600 font-bold truncate bg-emerald-50 px-3 py-1 rounded-lg">{data.image.name}</span>}
                                             </div>
                                         </div>
                                         
-                                        <button className="w-full md:w-auto px-8 py-3 bg-emerald-600 text-white font-bold rounded-xl hover:bg-emerald-700 active:scale-95 transition-all shadow-lg shadow-emerald-200 flex items-center justify-center gap-2">
-                                            <Plus size={20} /> Simpan Agenda
+                                        <button className="w-full md:w-auto px-8 py-4 bg-slate-900 text-white font-bold rounded-xl hover:bg-emerald-600 active:scale-95 transition-all shadow-lg flex items-center justify-center gap-2 text-sm tracking-wide">
+                                            <Plus size={18} strokeWidth={3} /> SIMPAN AGENDA
                                         </button>
                                     </div>
                                 </form>
@@ -160,118 +123,125 @@ export default function Index({ auth, schedules = [] }) {
                         </div>
                     )}
 
-                    {/* LIST AGENDA SECTION */}
-                    <div className="mb-6 flex items-center justify-between">
-                        <h3 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-                            <Calendar className="text-emerald-600" /> Daftar Jadwal Mendatang
-                        </h3>
-                        <span className="text-sm font-medium text-slate-500 bg-white px-3 py-1 rounded-full shadow-sm border border-slate-100">
-                            Total: {schedules.length} Kegiatan
-                        </span>
-                    </div>
-
-                    {/* EMPTY STATE */}
-                    {schedules.length === 0 ? (
-                        <div className="bg-white rounded-3xl p-12 text-center shadow-sm border border-slate-100">
-                           
-                            <h3 className="text-lg font-bold text-slate-700">Belum ada agenda</h3>
-                            <p className="text-slate-500">Jadwal pengajian atau kegiatan belum ditambahkan.</p>
+                    {/* LIST AGENDA (STYLE TABEL BARU) */}
+                    <div className="bg-white rounded-[2.5rem] shadow-sm border border-slate-200 overflow-hidden">
+                        <div className="p-8 border-b border-slate-100 flex justify-between items-center">
+                            <h3 className="font-bold text-lg text-slate-800 flex items-center gap-2">
+                                <LayoutList className="text-emerald-500" /> Jadwal Kegiatan
+                            </h3>
+                            <span className="text-xs font-bold text-slate-500 bg-slate-100 px-3 py-1 rounded-full">
+                                {schedules.length} Item
+                            </span>
                         </div>
-                    ) : (
-                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                            {schedules.map((item) => {
-                                const { day, month } = getDayAndMonth(item.date);
-                                return (
-                                    <div key={item.id} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100 flex flex-col sm:flex-row group hover:shadow-xl hover:-translate-y-1 transition-all duration-300">
-                                        
-                                        {/* Image Section */}
-                                        <div className="sm:w-48 h-48 sm:h-auto relative overflow-hidden bg-slate-200 shrink-0">
-                                            {item.image ? (
-                                                <img 
-                                                    src={`/storage/${item.image}`} 
-                                                    className="w-full h-full object-cover group-hover:scale-105 transition duration-700" 
-                                                    alt="Poster" 
-                                                />
-                                            ) : (
-                                                <div className="w-full h-full flex flex-col items-center justify-center text-slate-400 bg-slate-100">
-                                                    <ImageIcon size={32} className="mb-2 opacity-50" />
-                                                    <span className="text-xs font-medium uppercase tracking-wider">No Image</span>
-                                                </div>
-                                            )}
-                                            {/* Date Badge Overlay for Mobile */}
-                                            <div className="absolute top-3 left-3 sm:hidden bg-white/95 backdrop-blur rounded-xl px-3 py-1 text-center shadow-lg">
-                                                <span className="block text-xl font-black text-slate-800 leading-none">{day}</span>
-                                                <span className="block text-[10px] font-bold text-emerald-600 uppercase">{month}</span>
-                                            </div>
-                                        </div>
-
-                                        {/* Content Section */}
-                                        <div className="p-6 flex-1 flex flex-col justify-between relative">
-                                            {/* Delete Button */}
-                                            {auth.user.role === 'admin' && (
-                                                <button 
-                                                    onClick={() => {
-                                                        if(confirm('Yakin ingin menghapus agenda ini?')) {
-                                                            destroy(route('schedules.destroy', item.id))
-                                                        }
-                                                    }} 
-                                                    className="absolute top-4 right-4 p-2 text-slate-300 hover:text-red-500 hover:bg-red-50 rounded-full transition"
-                                                    title="Hapus Agenda"
-                                                >
-                                                    <Trash2 size={18} />
-                                                </button>
-                                            )}
-
-                                            <div>
-                                                <div className="flex justify-between items-start mb-2 pr-8">
-                                                    <span className={`px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest border ${
-                                                        item.type === 'pengajian' 
-                                                            ? 'bg-emerald-50 text-emerald-700 border-emerald-100' 
-                                                            : 'bg-blue-50 text-blue-700 border-blue-100'
-                                                    }`}>
-                                                        {item.type}
-                                                    </span>
-                                                </div>
-                                                
-                                                <h3 className="text-xl font-bold text-slate-800 mb-1 leading-tight group-hover:text-emerald-700 transition">
-                                                    {item.title}
-                                                </h3>
-                                                
-                                                <p className="text-emerald-600 font-medium text-sm mb-4 flex items-center gap-1.5">
-                                                    <User size={16} /> {item.ustadz_name}
-                                                </p>
-
-                                                <div className="space-y-2 border-t border-slate-50 pt-3">
-                                                    <div className="flex items-center gap-3 text-slate-500 text-sm">
-                                                        <div className="hidden sm:flex flex-col items-center justify-center bg-slate-50 border border-slate-100 rounded-lg w-10 h-10 shrink-0">
-                                                            <span className="text-xs font-bold text-emerald-600 uppercase leading-none">{month}</span>
-                                                            <span className="text-sm font-bold text-slate-800 leading-none">{day}</span>
-                                                        </div>
-                                                        <div className="sm:hidden text-emerald-500"><Calendar size={16}/></div>
-                                                        <span className="sm:hidden">{formatDate(item.date)}</span>
-                                                        <span className="hidden sm:block">{formatDate(item.date)}</span>
-                                                    </div>
-                                                    
-                                                    <div className="flex items-center gap-4 text-slate-500 text-sm pl-1">
-                                                        <div className="flex items-center gap-2">
-                                                            <Clock size={16} className="text-emerald-500" /> 
-                                                            {item.time.substring(0,5)} WIB
-                                                        </div>
-                                                        {item.location && (
-                                                            <div className="flex items-center gap-2 truncate">
-                                                                <MapPin size={16} className="text-emerald-500" /> 
-                                                                <span className="truncate max-w-[100px]">{item.location}</span>
+                        
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left border-collapse">
+                                <thead>
+                                    <tr className="bg-slate-50/50 border-b border-slate-100">
+                                        <th className="p-6 pl-8 text-xs font-bold text-slate-400 uppercase tracking-widest">Poster / Kegiatan</th>
+                                        <th className="p-6 text-xs font-bold text-slate-400 uppercase tracking-widest">Waktu & Tempat</th>
+                                        <th className="p-6 text-xs font-bold text-slate-400 uppercase tracking-widest">Jenis</th>
+                                        {auth.user.role === 'admin' && (
+                                            <th className="p-6 pr-8 text-xs font-bold text-slate-400 uppercase tracking-widest text-right">Aksi</th>
+                                        )}
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-slate-100">
+                                    {schedules.length > 0 ? schedules.map((item) => (
+                                        <tr key={item.id} className="hover:bg-slate-50 transition duration-150 group">
+                                            
+                                            {/* KOLOM 1: GAMBAR & JUDUL */}
+                                            <td className="p-6 pl-8">
+                                                <div className="flex items-center gap-5">
+                                                    {/* Thumbnail Poster */}
+                                                    <div className="w-16 h-16 rounded-xl overflow-hidden bg-slate-200 shrink-0 border border-slate-100">
+                                                        {item.image ? (
+                                                            <img src={`/storage/${item.image}`} className="w-full h-full object-cover" alt="Poster" />
+                                                        ) : (
+                                                            <div className="w-full h-full flex items-center justify-center text-slate-400">
+                                                                <ImageIcon size={20} className="opacity-50"/>
                                                             </div>
                                                         )}
                                                     </div>
+                                                    
+                                                    <div>
+                                                        <div className="font-bold text-slate-800 text-base">{item.title}</div>
+                                                        <div className="flex items-center gap-1.5 text-emerald-600 text-xs font-bold mt-1">
+                                                            <User size={12} /> {item.ustadz_name}
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                );
-                            })}
+                                            </td>
+
+                                            {/* KOLOM 2: WAKTU */}
+                                            <td className="p-6">
+                                                <div className="space-y-1">
+                                                    <div className="flex items-center gap-2 text-slate-700 text-sm font-bold">
+                                                        <Calendar size={14} className="text-slate-400"/> 
+                                                        {formatDate(item.date)}
+                                                    </div>
+                                                    <div className="flex items-center gap-2 text-slate-500 text-xs font-medium">
+                                                        <Clock size={14} className="text-slate-400"/> 
+                                                        {item.time.substring(0,5)} WIB
+                                                    </div>
+                                                    {item.location && (
+                                                        <div className="flex items-center gap-2 text-slate-500 text-xs font-medium">
+                                                            <MapPin size={14} className="text-slate-400"/> 
+                                                            {item.location}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            </td>
+
+                                            {/* KOLOM 3: JENIS/BADGE */}
+                                            <td className="p-6">
+                                                <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wide border ${
+                                                    item.type === 'pengajian' 
+                                                        ? 'bg-emerald-50 text-emerald-700 border-emerald-100' 
+                                                        : item.type === 'khutbah' 
+                                                            ? 'bg-blue-50 text-blue-700 border-blue-100'
+                                                            : 'bg-slate-50 text-slate-600 border-slate-200'
+                                                }`}>
+                                                    <span className={`w-1.5 h-1.5 rounded-full ${
+                                                        item.type === 'pengajian' ? 'bg-emerald-500' : item.type === 'khutbah' ? 'bg-blue-500' : 'bg-slate-500'
+                                                    }`}></span>
+                                                    {item.type}
+                                                </span>
+                                            </td>
+
+                                            {/* KOLOM 4: AKSI (HAPUS) */}
+                                            {auth.user.role === 'admin' && (
+                                                <td className="p-6 pr-8 text-right">
+                                                    <button 
+                                                        onClick={() => {
+                                                            if(confirm('Yakin ingin menghapus agenda ini?')) {
+                                                                destroy(route('schedules.destroy', item.id))
+                                                            }
+                                                        }} 
+                                                        className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-white border border-slate-200 text-slate-400 hover:border-red-200 hover:bg-red-50 hover:text-red-500 transition shadow-sm"
+                                                        title="Hapus Agenda"
+                                                    >
+                                                        <Trash2 size={16} />
+                                                    </button>
+                                                </td>
+                                            )}
+                                        </tr>
+                                    )) : (
+                                        <tr>
+                                            <td colSpan="4" className="p-12 text-center">
+                                                <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-4 text-slate-300">
+                                                    <Search size={32} />
+                                                </div>
+                                                <h3 className="text-slate-900 font-bold">Belum ada agenda</h3>
+                                                <p className="text-slate-400 text-sm mt-1">Jadwal kegiatan masjid akan muncul di sini.</p>
+                                            </td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
                         </div>
-                    )}
+                    </div>
+
                 </div>
             </div>
         </AuthenticatedLayout>

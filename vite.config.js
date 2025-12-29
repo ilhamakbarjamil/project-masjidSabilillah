@@ -10,9 +10,9 @@ export default defineConfig({
         }),
         react(),
     ],
-    server: {
-        hmr: {
-            host: '4869119bb2aa.ngrok-free.app/', // GANTI DENGAN URL NGROK KAMU (Tanpa https://)
-        },
-    },
+    // server: {
+    //     hmr: {
+    //         host: '4869119bb2aa.ngrok-free.app', // GANTI DENGAN URL NGROK KAMU (Tanpa https://)
+    //     },
+    // },
 });

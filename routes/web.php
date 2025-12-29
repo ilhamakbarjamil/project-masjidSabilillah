@@ -72,16 +72,16 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/admin/loans', [LoanController::class, 'index'])->name('admin.loans.index');
         Route::patch('/admin/loans/{loan}', [LoanController::class, 'updateStatus'])->name('admin.loans.update');
-        
+
         Route::post('/finance', [FinanceController::class, 'store'])->name('finance.store');
         Route::delete('/finance/{finance}', [FinanceController::class, 'destroy'])->name('finance.destroy');
-        
+
         Route::post('/articles', [ArticleController::class, 'store'])->name('articles.store');
         Route::delete('/articles/{article}', [ArticleController::class, 'destroy'])->name('articles.destroy');
-        
+
         Route::post('/schedules', [ScheduleController::class, 'store'])->name('schedules.store');
         Route::delete('/schedules/{schedule}', [ScheduleController::class, 'destroy'])->name('schedules.destroy');
     });
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
